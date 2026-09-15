@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#173e32">
+  <meta name="description" content="Masira, recyclage de papier au Maroc. Une nouvelle perspective pour chaque fibre.">
+  <title>Masira — Le papier a un avenir.</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%23173e32'/%3E%3Ctext x='12' y='45' font-family='Georgia' font-size='46' fill='%23efeadc'%3Em%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="assets/gsap.min.js"></script><script defer src="assets/ScrollTrigger.min.js"></script><script defer src="app.js"></script>
+</head>
+<body>
+<a class="skip" href="#vision">Aller au contenu</a>
+<div class="scroll-progress" aria-hidden="true"></div>
+<header class="header">
+  <a class="logo" href="#" aria-label="Masira, accueil">masira<span class="logo-star">✳</span></a>
+  <nav aria-label="Navigation principale"><a href="#vision" data-en="Our vision">Notre vision</a><a href="#cycle" data-en="The cycle">Le cycle</a><a href="#matiere" data-en="The material">La matière</a></nav>
+  <div class="header-actions"><button id="language" aria-label="Switch to English">EN</button><a class="contact-link" href="#contact" data-en="Let's talk ↗">Parlons ensemble ↗</a><button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span></button></div>
+</header>
+<main>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-top"><span class="eyebrow" data-en="PAPER RECYCLING. REIMAGINED.">LE RECYCLAGE DU PAPIER. RÉINVENTÉ.</span><span class="location">MAROC <span>↗</span> MOROCCO</span></div>
+    <h1 id="hero-title"><span class="title-line" data-en="Every end.">Chaque fin.</span><span class="title-line second" data-en="A new beginning.">Un nouveau <em>début.</em></span></h1>
+    <div class="hero-art"><img src="assets/paper-loop.png" alt="Une boucle sculpturale de papier recyclé, symbole d'un nouveau cycle" width="1536" height="1024" fetchpriority="high"></div>
+    <div class="hero-orbit" aria-hidden="true"><span>LA MATIÈRE CONTINUE</span><b>↗</b><span>THE CYCLE GOES ON</span></div>
+    <div class="hero-bottom"><a class="discover" href="#vision"><span class="round-arrow">↓</span><span data-en="Scroll to see things differently">Défiler pour voir autrement</span></a><p data-en="We give paper a new future.<br>And resources, a new perspective.">Nous donnons au papier un nouvel avenir.<br>Et aux ressources, une nouvelle perspective.</p><span class="hero-index">01 — 04</span></div>
+    <span class="hero-side" aria-hidden="true">UNE NOUVELLE PERSPECTIVE POUR CHAQUE FIBRE</span>
+  </section>
+  <section id="vision" class="vision section-pad">
+    <div class="section-meta"><span data-en="01 / OUR CONVICTION">01 / NOTRE CONVICTION</span><span>MASIRA · مسيرة</span></div>
+    <div class="vision-layout"><span class="asterisk" aria-hidden="true">✳</span><div><h2 class="manifesto" data-en="It's not the end<br>of the story.<br>It's the raw material<br><em>for the next one.</em>">Ce n’est pas la fin<br>de l’histoire.<br>C’est la matière<br><em>de la suivante.</em></h2><div class="vision-copy"><span class="tiny-line"></span><p data-en="A used sheet is still full of possibilities. In Morocco, Masira transforms recovered paper into a resource, keeping the value of its fibres in motion.">Une feuille utilisée est encore pleine de possibilités. Au Maroc, Masira transforme le papier récupéré en ressource, pour faire vivre la valeur de ses fibres.</p></div></div></div>
+    <div class="vision-foot"><span data-en="A LOCAL COMMITMENT.">UN ENGAGEMENT LOCAL.</span><span data-en="A CIRCULAR VISION.">UNE VISION CIRCULAIRE.</span><span>↘</span></div>
+  </section>
+  <section id="cycle" class="cycle" aria-labelledby="cycle-title">
+    <div class="cycle-stage section-pad">
+      <div class="section-meta"><span data-en="02 / THE TRANSFORMATION">02 / LA TRANSFORMATION</span><span class="cycle-caption" data-en="SCROLL. THE MATERIAL EVOLVES.">DÉFILEZ. LA MATIÈRE ÉVOLUE.</span></div>
+      <div class="cycle-heading"><h2 id="cycle-title" data-en="Nothing ends.<br><em>Everything transforms.</em>">Rien ne se perd.<br><em>Tout se transforme.</em></h2><p data-en="One material.<br>Many possibilities.">Une même matière.<br>De nouvelles possibilités.</p></div>
+      <div class="cycle-content"><div class="particle-container"><canvas id="fibre-canvas" aria-label="Des fibres dispersées se rassemblent progressivement en une feuille, puis en une boucle"></canvas><div class="material-caption"><span>MATIÈRE EN MOUVEMENT</span><span id="material-state">01 / COLLECTER</span></div></div>
+      <div class="steps">
+        <article class="step active"><span class="step-number">01</span><div><h3 data-en="Recover.">Récupérer.</h3><p data-en="Used paper becomes the starting point. Collected and sorted, it enters a new cycle.">Le papier usagé devient un point de départ. Collecté et trié, il entre dans un nouveau cycle.</p><span class="step-tag" data-en="FROM WASTE TO RESOURCE">DU DÉCHET À LA RESSOURCE</span></div></article>
+        <article class="step"><span class="step-number">02</span><div><h3 data-en="Transform.">Transformer.</h3><p data-en="The paper is pulped. Its fibres are separated and cleaned, ready to come together again.">Le papier est remis en pâte. Ses fibres sont séparées et nettoyées, prêtes à être réunies à nouveau.</p><span class="step-tag" data-en="REVEAL THE POTENTIAL">RÉVÉLER LE POTENTIEL</span></div></article>
+        <article class="step"><span class="step-number">03</span><div><h3 data-en="Begin again.">Recommencer.</h3><p data-en="Formed and dried, the material becomes paper again. A new life, built from what already exists.">Formée et séchée, la matière redevient papier. Une nouvelle vie, à partir de ce qui existe déjà.</p><span class="step-tag" data-en="THE NEXT CHAPTER STARTS HERE">LE PROCHAIN CHAPITRE COMMENCE ICI</span></div></article>
+      </div></div>
+      <div class="cycle-track" aria-hidden="true"><span></span></div><div class="cycle-foot"><span data-en="RECOVERED PAPER">PAPIER RÉCUPÉRÉ</span><span>→</span><span data-en="NEW POSSIBILITIES">NOUVELLES POSSIBILITÉS</span></div>
+    </div>
+  </section>
+  <div class="marquee" aria-hidden="true"><div>RIEN NE SE PERD. <i>TOUT SE TRANSFORME.</i> ✳ RIEN NE SE PERD. <i>TOUT SE TRANSFORME.</i> ✳ </div></div>
+  <section id="matiere" class="matter section-pad">
+    <div class="section-meta"><span data-en="03 / A MATERIAL WITH A FUTURE">03 / UNE MATIÈRE D’AVENIR</span><span data-en="MADE OF POSSIBILITIES">FAITE DE POSSIBILITÉS</span></div>
+    <div class="matter-layout"><div class="matter-title"><h2 data-en="A new life.<br>The same<br><em>potential.</em>">Une nouvelle vie.<br>Le même<br><em>potentiel.</em></h2><p data-en="Every fibre has something more to give. Our role: to keep it in the cycle.">Chaque fibre a encore quelque chose à offrir. Notre rôle : la garder dans le cycle.</p><a class="text-link" href="#contact" data-en="Imagine the next chapter together ↗">Imaginons la suite ensemble ↗</a></div><div class="matter-notes"><article><span>↗</span><h3 data-en="Value what exists">Valoriser l’existant</h3><p data-en="Recover paper that has already served its purpose, and preserve the value of the material.">Récupérer le papier qui a déjà servi et préserver la valeur de la matière.</p></article><article><span>↗</span><h3 data-en="Think in cycles">Penser en cycles</h3><p data-en="Connect recovery, transformation and use in one continuous approach.">Relier récupération, transformation et usage dans une même démarche.</p></article><article><span>↗</span><h3 data-en="Build locally">Construire ici</h3><p data-en="Contribute to a paper recycling industry rooted in Morocco.">Contribuer à une filière de recyclage du papier ancrée au Maroc.</p></article></div></div>
+    <div class="big-type" aria-hidden="true">re<span>—</span>source.</div>
+  </section>
+  <section id="contact" class="contact section-pad">
+    <div class="section-meta"><span data-en="04 / WHAT COMES NEXT">04 / ET MAINTENANT</span><span>MAROC · MOROCCO</span></div>
+    <div class="contact-content"><p data-en="The next chapter starts with a conversation.">Le prochain chapitre commence par une conversation.</p><h2 data-en="Let's make<br><em>it happen.</em>">Faisons<br><em>la suite.</em></h2><button class="inquiry-button" id="open-inquiry"><span data-en="Prepare an enquiry">Préparer une demande</span><span class="round-arrow">↗</span></button></div>
+    <footer><a class="logo" href="#">masira<span class="logo-star">✳</span></a><span data-en="Paper has a future.">Le papier a un avenir.</span><span>© <span id="year">2026</span> MASIRA</span><button id="motion-toggle" aria-pressed="false" data-en="Pause motion">Pause animation</button><a href="#" class="back-top" aria-label="Retour en haut">↑</a></footer>
+  </section>
+</main>
+<dialog id="inquiry-dialog"><button class="close-dialog" aria-label="Fermer">×</button><span class="eyebrow" data-en="LET'S START HERE">COMMENÇONS ICI</span><h2 data-en="Your next<br><em>chapter.</em>">Votre prochain<br><em>chapitre.</em></h2><p class="dialog-intro" data-en="Prepare your brief to share with the Masira team. Downloading it does not send a message.">Préparez votre brief à partager avec l’équipe Masira. Le téléchargement n’envoie aucun message.</p><form id="inquiry-form"><label><span data-en="Your name / Company">Votre nom / Entreprise</span><input name="name" autocomplete="organization" required maxlength="120"></label><label><span data-en="Your email">Votre e-mail</span><input name="email" type="email" autocomplete="email" required maxlength="160"></label><label><span data-en="Your project">Votre projet</span><textarea name="message" rows="3" required maxlength="3000"></textarea></label><button type="submit" class="submit-button" data-en="Download my brief ↗">Télécharger mon brief ↗</button><p id="form-status" role="status"></p></form></dialog>
+</body></html>
