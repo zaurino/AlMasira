@@ -17,7 +17,10 @@ let renderer;
 try { renderer = new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'}); }
 catch { host.classList.add('no-webgl'); document.querySelector('.machine-fallback').hidden=false; }
 
-if(renderer) init();
+if(renderer) {
+  try { init(); }
+  catch (error) { console.warn('Masira 3D scene unavailable', error); renderer = null; host.classList.add('no-webgl'); document.querySelector('.machine-fallback').hidden=false; }
+}
 else {
   function fallback(e){const i=Math.min(4,Math.floor((e?.detail?.progress??1)*5));updateCopy(i,e?.detail?.progress??1);}
   addEventListener('masira:machine',fallback); fallback();
@@ -38,6 +41,7 @@ function updateCopy(index,progress){
 }
 
 function init(){
+  document.querySelector('.machine-fallback').hidden=true;
   renderer.setPixelRatio(Math.min(devicePixelRatio,1.65));
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;
