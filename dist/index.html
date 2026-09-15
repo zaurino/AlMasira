@@ -7,7 +7,7 @@
   <title>Masira — Le papier a un avenir.</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%23173e32'/%3E%3Ctext x='12' y='45' font-family='Georgia' font-size='46' fill='%23efeadc'%3Em%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
-  <script defer src="assets/gsap.min.js"></script><script defer src="assets/ScrollTrigger.min.js"></script><script defer src="app.js"></script>
+  <script defer src="assets/gsap.min.js"></script><script defer src="assets/ScrollTrigger.min.js"></script><script defer src="app.js"></script><script type="module" src="machine.js"></script>
 </head>
 <body>
 <a class="skip" href="#vision">Aller au contenu</a>
@@ -31,17 +31,22 @@
     <div class="vision-layout"><span class="asterisk" aria-hidden="true">✳</span><div><h2 class="manifesto" data-en="It's not the end<br>of the story.<br>It's the raw material<br><em>for the next one.</em>">Ce n’est pas la fin<br>de l’histoire.<br>C’est la matière<br><em>de la suivante.</em></h2><div class="vision-copy"><span class="tiny-line"></span><p data-en="A used sheet is still full of possibilities. In Morocco, Masira transforms recovered paper into a resource, keeping the value of its fibres in motion.">Une feuille utilisée est encore pleine de possibilités. Au Maroc, Masira transforme le papier récupéré en ressource, pour faire vivre la valeur de ses fibres.</p></div></div></div>
     <div class="vision-foot"><span data-en="A LOCAL COMMITMENT.">UN ENGAGEMENT LOCAL.</span><span data-en="A CIRCULAR VISION.">UNE VISION CIRCULAIRE.</span><span>↘</span></div>
   </section>
-  <section id="cycle" class="cycle" aria-labelledby="cycle-title">
-    <div class="cycle-stage section-pad">
-      <div class="section-meta"><span data-en="02 / THE TRANSFORMATION">02 / LA TRANSFORMATION</span><span class="cycle-caption" data-en="SCROLL. THE MATERIAL EVOLVES.">DÉFILEZ. LA MATIÈRE ÉVOLUE.</span></div>
-      <div class="cycle-heading"><h2 id="cycle-title" data-en="Nothing ends.<br><em>Everything transforms.</em>">Rien ne se perd.<br><em>Tout se transforme.</em></h2><p data-en="One material.<br>Many possibilities.">Une même matière.<br>De nouvelles possibilités.</p></div>
-      <div class="cycle-content"><div class="particle-container"><canvas id="fibre-canvas" aria-label="Des fibres dispersées se rassemblent progressivement en une feuille, puis en une boucle"></canvas><div class="material-caption"><span>MATIÈRE EN MOUVEMENT</span><span id="material-state">01 / COLLECTER</span></div></div>
-      <div class="steps">
-        <article class="step active"><span class="step-number">01</span><div><h3 data-en="Recover.">Récupérer.</h3><p data-en="Used paper becomes the starting point. Collected and sorted, it enters a new cycle.">Le papier usagé devient un point de départ. Collecté et trié, il entre dans un nouveau cycle.</p><span class="step-tag" data-en="FROM WASTE TO RESOURCE">DU DÉCHET À LA RESSOURCE</span></div></article>
-        <article class="step"><span class="step-number">02</span><div><h3 data-en="Transform.">Transformer.</h3><p data-en="The paper is pulped. Its fibres are separated and cleaned, ready to come together again.">Le papier est remis en pâte. Ses fibres sont séparées et nettoyées, prêtes à être réunies à nouveau.</p><span class="step-tag" data-en="REVEAL THE POTENTIAL">RÉVÉLER LE POTENTIEL</span></div></article>
-        <article class="step"><span class="step-number">03</span><div><h3 data-en="Begin again.">Recommencer.</h3><p data-en="Formed and dried, the material becomes paper again. A new life, built from what already exists.">Formée et séchée, la matière redevient papier. Une nouvelle vie, à partir de ce qui existe déjà.</p><span class="step-tag" data-en="THE NEXT CHAPTER STARTS HERE">LE PROCHAIN CHAPITRE COMMENCE ICI</span></div></article>
-      </div></div>
-      <div class="cycle-track" aria-hidden="true"><span></span></div><div class="cycle-foot"><span data-en="RECOVERED PAPER">PAPIER RÉCUPÉRÉ</span><span>→</span><span data-en="NEW POSSIBILITIES">NOUVELLES POSSIBILITÉS</span></div>
+  <section id="cycle" class="cycle machine-section" aria-labelledby="cycle-title">
+    <div class="machine-stage section-pad">
+      <div class="section-meta"><span data-en="02 / INSIDE THE TRANSFORMATION">02 / AU CŒUR DE LA TRANSFORMATION</span><span data-en="SCROLL TO ASSEMBLE">DÉFILEZ POUR ASSEMBLER</span></div>
+      <div class="machine-heading"><h2 id="cycle-title" data-en="An idea.<br><em>A whole new life.</em>">Une idée.<br><em>Toute une nouvelle vie.</em></h2><div class="machine-intro"><span class="live-dot"></span><span data-en="THE MAKING OF PAPER">LA FABRIQUE DU PAPIER</span><p data-en="Piece by piece.<br>Fibre by fibre.">Pièce après pièce.<br>Fibre après fibre.</p></div></div>
+      <div class="machine-viewport" id="machine-viewport">
+        <canvas id="machine-canvas" aria-label="Modèle 3D animé d’une ligne de fabrication du papier : structure, table de formation, presse, sécheurs et bobineuse"></canvas>
+        <div class="machine-fallback" hidden><strong data-en="From fibre to paper">De la fibre au papier</strong><p data-en="Forming → Pressing → Drying → Reeling">Formation → Pressage → Séchage → Bobinage</p></div>
+        <div class="machine-watermark" aria-hidden="true">MASIRA</div>
+        <div class="machine-coordinate" aria-hidden="true">M—01<br>34° N / 06° W</div>
+        <div class="machine-part-label" id="machine-part-label" aria-hidden="true"><span></span><b>01 — STRUCTURE</b></div>
+        <span class="machine-model-note" data-en="PAPER MACHINE / CONCEPT MODEL">MACHINE À PAPIER / MODÈLE CONCEPTUEL</span>
+        <div class="machine-drag-hint" data-en="DRAG TO EXPLORE ↔">GLISSER POUR EXPLORER ↔</div>
+      </div>
+      <div class="machine-narrative"><div class="machine-counter"><span id="machine-number">01</span><small>/ 05</small></div><div class="machine-description"><h3 id="machine-title">Tout commence par une base.</h3><p id="machine-copy">La structure prend place. Chaque élément trouve sa position dans la ligne.</p></div><div class="machine-completion"><span id="machine-percent">0%</span><small data-en="ASSEMBLED">ASSEMBLÉ</small></div></div>
+      <div class="machine-chapters" aria-label="Étapes de fabrication"><button data-stage="0"><span>01</span><b data-en="Structure">Structure</b></button><button data-stage="1"><span>02</span><b data-en="Forming">Formation</b></button><button data-stage="2"><span>03</span><b data-en="Pressing">Pressage</b></button><button data-stage="3"><span>04</span><b data-en="Drying">Séchage</b></button><button data-stage="4"><span>05</span><b data-en="Reeling">Bobinage</b></button></div>
+      <div class="machine-bottom"><span data-en="RECOVERED FIBRES → A NEW SHEET">FIBRES RÉCUPÉRÉES → UNE NOUVELLE FEUILLE</span><button id="machine-replay" data-en="↺ Replay assembly">↺ Revoir l’assemblage</button></div>
     </div>
   </section>
   <div class="marquee" aria-hidden="true"><div>RIEN NE SE PERD. <i>TOUT SE TRANSFORME.</i> ✳ RIEN NE SE PERD. <i>TOUT SE TRANSFORME.</i> ✳ </div></div>
