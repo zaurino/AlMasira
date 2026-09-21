@@ -1,65 +1,120 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#173e32">
-  <meta name="description" content="Masira, recyclage de papier au Maroc. Une nouvelle perspective pour chaque fibre.">
-  <title>Masira — Le papier a un avenir.</title>
+  <meta name="description" content="Masira — paper recycling in Morocco. A new perspective for every fibre.">
+  <title>Masira — Paper has a future.</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%23173e32'/%3E%3Ctext x='12' y='45' font-family='Georgia' font-size='46' fill='%23efeadc'%3Em%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.css">
-  <script defer src="assets/gsap.min.js"></script><script defer src="assets/ScrollTrigger.min.js"></script><script defer src="app.js"></script><script type="module" src="machine.js"></script>
+  <link rel="stylesheet" href="style.css?v=14">
+  <link rel="stylesheet" href="dialog.css?v=1">
+<link rel="stylesheet" href="menu.css?v=1">
+<link rel="stylesheet" href="mobile.css?v=1">
+  <script defer src="app.js?v=4"></script><script defer src="film.js?v=8"></script>
 </head>
 <body>
-<a class="skip" href="#vision">Aller au contenu</a>
+<a class="skip" href="#vision" data-fr="Aller au contenu" data-ar="تخطَّ إلى المحتوى">Skip to content</a>
 <div class="scroll-progress" aria-hidden="true"></div>
 <header class="header">
-  <a class="logo" href="#" aria-label="Masira, accueil">masira<span class="logo-star">✳</span></a>
-  <nav aria-label="Navigation principale"><a href="#vision" data-en="Our vision">Notre vision</a><a href="#cycle" data-en="The cycle">Le cycle</a><a href="#matiere" data-en="The material">La matière</a></nav>
-  <div class="header-actions"><button id="language" aria-label="Switch to English">EN</button><a class="contact-link" href="#contact" data-en="Let's talk ↗">Parlons ensemble ↗</a><button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span></button></div>
+  <a class="logo" href="#" aria-label="Masira, accueil"><img src="assets/brand/masira-logo.png" alt="Masira"></a>
+  <nav aria-label="Main navigation"><a href="about.html" data-fr="À propos">About us</a><a href="products.html" data-fr="Produits">Products</a><a href="sustainability.html" data-fr="Durabilité">Sustainabilité</a></nav>
+  <div class="header-actions"><div class="lang-seg" id="language" role="group" aria-label="Language"><button class="lang-opt" data-lang="fr">FR</button><button class="lang-opt" data-lang="en">EN</button><button class="lang-opt" data-lang="ar">AR</button></div><a class="contact-link" href="#devis" data-inquiry data-fr="Demander un devis ↗" data-ar="اطلب عرض سعر ↗">Request a quote ↗</a><button class="menu-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button></div>
 </header>
+
+<div class="mnav" id="mobile-menu" inert>
+<nav class="mnav-links" aria-label="Mobile navigation">
+<a href="index.html" aria-current="page" data-fr="<span>Accueil</span><i>01</i>" data-ar="<span>الرئيسية</span><i>01</i>"><span>Home</span><i>01</i></a>
+<a href="about.html" data-fr="<span>À propos</span><i>02</i>" data-ar="<span>من نحن</span><i>02</i>"><span>About us</span><i>02</i></a>
+<a href="products.html" data-fr="<span>Produits</span><i>03</i>" data-ar="<span>المنتجات</span><i>03</i>"><span>Products</span><i>03</i></a>
+<a href="sustainability.html" data-fr="<span>Durabilité</span><i>04</i>" data-ar="<span>الاستدامة</span><i>04</i>"><span>Sustainability</span><i>04</i></a>
+</nav>
+<div class="mnav-foot">
+<button class="mnav-cta" type="button" data-inquiry data-fr="Demander un devis ↗" data-ar="اطلب عرض سعر ↗">Request a quote ↗</button>
+<div class="mnav-lang" role="group" aria-label="Language">
+<button type="button" data-lang="en">English</button><button type="button" data-lang="fr">Français</button><button type="button" data-lang="ar">العربية</button>
+</div>
+<a class="mnav-mail" href="mailto:info@masirapapermill.com">info@masirapapermill.com</a>
+<p class="mnav-addr"><span data-fr="Al Massira Paper Mills" data-ar="مصانع ورق المسيرة">Al Massira Paper Mills</span><br>Atlantic Free Zone · <span data-fr="Kénitra, Maroc" data-ar="القنيطرة، المغرب">Kénitra, Morocco</span></p>
+</div>
+</div>
+
 <main>
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-top"><span class="eyebrow" data-en="PAPER RECYCLING. REIMAGINED.">LE RECYCLAGE DU PAPIER. RÉINVENTÉ.</span><span class="location">MAROC <span>↗</span> MOROCCO</span></div>
-    <h1 id="hero-title"><span class="title-line" data-en="Every end.">Chaque fin.</span><span class="title-line second" data-en="A new beginning.">Un nouveau <em>début.</em></span></h1>
-    <div class="hero-art"><img src="assets/paper-loop.png" alt="Une boucle sculpturale de papier recyclé, symbole d'un nouveau cycle" width="1536" height="1024" fetchpriority="high"></div>
-    <div class="hero-orbit" aria-hidden="true"><span>LA MATIÈRE CONTINUE</span><b>↗</b><span>THE CYCLE GOES ON</span></div>
-    <div class="hero-bottom"><a class="discover" href="#vision"><span class="round-arrow">↓</span><span data-en="Scroll to see things differently">Défiler pour voir autrement</span></a><p data-en="We give paper a new future.<br>And resources, a new perspective.">Nous donnons au papier un nouvel avenir.<br>Et aux ressources, une nouvelle perspective.</p><span class="hero-index">01 — 04</span></div>
-    <span class="hero-side" aria-hidden="true">UNE NOUVELLE PERSPECTIVE POUR CHAQUE FIBRE</span>
-  </section>
-  <section id="vision" class="vision section-pad">
-    <div class="section-meta"><span data-en="01 / OUR CONVICTION">01 / NOTRE CONVICTION</span><span>MASIRA · مسيرة</span></div>
-    <div class="vision-layout"><span class="asterisk" aria-hidden="true">✳</span><div><h2 class="manifesto" data-en="It's not the end<br>of the story.<br>It's the raw material<br><em>for the next one.</em>">Ce n’est pas la fin<br>de l’histoire.<br>C’est la matière<br><em>de la suivante.</em></h2><div class="vision-copy"><span class="tiny-line"></span><p data-en="A used sheet is still full of possibilities. In Morocco, Masira transforms recovered paper into a resource, keeping the value of its fibres in motion.">Une feuille utilisée est encore pleine de possibilités. Au Maroc, Masira transforme le papier récupéré en ressource, pour faire vivre la valeur de ses fibres.</p></div></div></div>
-    <div class="vision-foot"><span data-en="A LOCAL COMMITMENT.">UN ENGAGEMENT LOCAL.</span><span data-en="A CIRCULAR VISION.">UNE VISION CIRCULAIRE.</span><span>↘</span></div>
-  </section>
-  <section id="cycle" class="cycle machine-section" aria-labelledby="cycle-title">
-    <div class="machine-stage section-pad">
-      <div class="section-meta"><span data-en="02 / INSIDE THE TRANSFORMATION">02 / AU CŒUR DE LA TRANSFORMATION</span><span data-en="SCROLL TO ASSEMBLE">DÉFILEZ POUR ASSEMBLER</span></div>
-      <div class="machine-heading"><h2 id="cycle-title" data-en="An idea.<br><em>A whole new life.</em>">Une idée.<br><em>Toute une nouvelle vie.</em></h2><div class="machine-intro"><span class="live-dot"></span><span data-en="THE MAKING OF PAPER">LA FABRIQUE DU PAPIER</span><p data-en="Piece by piece.<br>Fibre by fibre.">Pièce après pièce.<br>Fibre après fibre.</p></div></div>
-      <div class="machine-viewport" id="machine-viewport">
-        <canvas id="machine-canvas" aria-label="Modèle 3D animé d’une ligne de fabrication du papier : structure, table de formation, presse, sécheurs et bobineuse"></canvas>
-        <div class="machine-fallback"><strong data-en="From fibre to paper">De la fibre au papier</strong><p data-en="Forming → Pressing → Drying → Reeling">Formation → Pressage → Séchage → Bobinage</p><div class="fallback-schematic" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></div></div>
-        <div class="machine-watermark" aria-hidden="true">MASIRA</div>
-        <div class="machine-coordinate" aria-hidden="true">M—01<br>34° N / 06° W</div>
-        <div class="machine-part-label" id="machine-part-label" aria-hidden="true"><span></span><b>01 — STRUCTURE</b></div>
-        <span class="machine-model-note" data-en="PAPER MACHINE / CONCEPT MODEL">MACHINE À PAPIER / MODÈLE CONCEPTUEL</span>
-        <div class="machine-drag-hint" data-en="DRAG TO EXPLORE ↔">GLISSER POUR EXPLORER ↔</div>
-      </div>
-      <div class="machine-narrative"><div class="machine-counter"><span id="machine-number">01</span><small>/ 05</small></div><div class="machine-description"><h3 id="machine-title">Tout commence par une base.</h3><p id="machine-copy">La structure prend place. Chaque élément trouve sa position dans la ligne.</p></div><div class="machine-completion"><span id="machine-percent">0%</span><small data-en="ASSEMBLED">ASSEMBLÉ</small></div></div>
-      <div class="machine-chapters" aria-label="Étapes de fabrication"><button data-stage="0"><span>01</span><b data-en="Structure">Structure</b></button><button data-stage="1"><span>02</span><b data-en="Forming">Formation</b></button><button data-stage="2"><span>03</span><b data-en="Pressing">Pressage</b></button><button data-stage="3"><span>04</span><b data-en="Drying">Séchage</b></button><button data-stage="4"><span>05</span><b data-en="Reeling">Bobinage</b></button></div>
-      <div class="machine-bottom"><span data-en="RECOVERED FIBRES → A NEW SHEET">FIBRES RÉCUPÉRÉES → UNE NOUVELLE FEUILLE</span><button id="machine-replay" data-en="↺ Replay assembly">↺ Revoir l’assemblage</button></div>
-    </div>
-  </section>
-  <div class="marquee" aria-hidden="true"><div>RIEN NE SE PERD. <i>TOUT SE TRANSFORME.</i> ✳ RIEN NE SE PERD. <i>TOUT SE TRANSFORME.</i> ✳ </div></div>
-  <section id="matiere" class="matter section-pad">
-    <div class="section-meta"><span data-en="03 / A MATERIAL WITH A FUTURE">03 / UNE MATIÈRE D’AVENIR</span><span data-en="MADE OF POSSIBILITIES">FAITE DE POSSIBILITÉS</span></div>
-    <div class="matter-layout"><div class="matter-title"><h2 data-en="A new life.<br>The same<br><em>potential.</em>">Une nouvelle vie.<br>Le même<br><em>potentiel.</em></h2><p data-en="Every fibre has something more to give. Our role: to keep it in the cycle.">Chaque fibre a encore quelque chose à offrir. Notre rôle : la garder dans le cycle.</p><a class="text-link" href="#contact" data-en="Imagine the next chapter together ↗">Imaginons la suite ensemble ↗</a></div><div class="matter-notes"><article><span>↗</span><h3 data-en="Value what exists">Valoriser l’existant</h3><p data-en="Recover paper that has already served its purpose, and preserve the value of the material.">Récupérer le papier qui a déjà servi et préserver la valeur de la matière.</p></article><article><span>↗</span><h3 data-en="Think in cycles">Penser en cycles</h3><p data-en="Connect recovery, transformation and use in one continuous approach.">Relier récupération, transformation et usage dans une même démarche.</p></article><article><span>↗</span><h3 data-en="Build locally">Construire ici</h3><p data-en="Contribute to a paper recycling industry rooted in Morocco.">Contribuer à une filière de recyclage du papier ancrée au Maroc.</p></article></div></div>
-    <div class="big-type" aria-hidden="true">re<span>—</span>source.</div>
-  </section>
-  <section id="contact" class="contact section-pad">
-    <div class="section-meta"><span data-en="04 / WHAT COMES NEXT">04 / ET MAINTENANT</span><span>MAROC · MOROCCO</span></div>
-    <div class="contact-content"><p data-en="The next chapter starts with a conversation.">Le prochain chapitre commence par une conversation.</p><h2 data-en="Let's make<br><em>it happen.</em>">Faisons<br><em>la suite.</em></h2><button class="inquiry-button" id="open-inquiry"><span data-en="Prepare an enquiry">Préparer une demande</span><span class="round-arrow">↗</span></button></div>
-    <footer><a class="logo" href="#">masira<span class="logo-star">✳</span></a><span data-en="Paper has a future.">Le papier a un avenir.</span><span>© <span id="year">2026</span> MASIRA</span><button id="motion-toggle" aria-pressed="false" data-en="Pause motion">Pause animation</button><a href="#" class="back-top" aria-label="Retour en haut">↑</a></footer>
-  </section>
+<section class="brand-intro" aria-labelledby="brand-title">
+  <div class="intro-overline" data-fr="UNE NOUVELLE PERSPECTIVE SUR LE PAPIER">A NEW PERSPECTIVE ON PAPER</div>
+  <h1 id="brand-title" class="brand-lockup" aria-label="MASIRA">
+<svg xmlns="http://www.w3.org/2000/svg" width="162" height="96" viewBox="0 0 162 96" class="brand-mark" aria-hidden="true" focusable="false">
+
+
+
+<defs>
+<mask id="intro-masira-left" maskUnits="userSpaceOnUse" x="0" y="0" width="162" height="96" style="mask-type:luminance"><path class="brand-mark-stroke brand-mark-first" d="M 7,66 L 19,66 C 28,66 27,53 35,34 C 40,23 48,12 54,12 C 60,12 71,29 80,42 C 90,57 95,65 94,74 C 94,83 88,86 82,86 C 72,86 67,77 70,64 L 70,47" pathLength="1000" fill="none" stroke="white" stroke-width="25" stroke-linecap="butt" stroke-linejoin="round"/></mask>
+<mask id="intro-masira-right" maskUnits="userSpaceOnUse" x="0" y="0" width="162" height="96" style="mask-type:luminance"><path class="brand-mark-stroke brand-mark-second" d="M 91,31 C 98,22 104,12 110,12 C 118,12 127,29 132,43 C 136,54 137,66 145,66 L 157,66" pathLength="1000" fill="none" stroke="white" stroke-width="25" stroke-linecap="butt" stroke-linejoin="round"/></mask>
+</defs>
+<g fill="#009165">
+<path d="M 51.50,4.18 C 50.33,4.60,49.04,5.04,47.50,6.26 C 45.96,7.48,43.69,9.96,42.29,11.50 C 40.89,13.04,40.27,13.83,39.11,15.50 C 37.96,17.17,36.49,19.65,35.39,21.50 C 34.28,23.35,33.54,24.61,32.50,26.61 C 31.46,28.61,30.18,31.19,29.16,33.50 C 28.15,35.81,27.47,37.50,26.42,40.50 C 25.36,43.50,23.75,48.83,22.81,51.50 C 21.88,54.17,21.27,55.50,20.83,56.50 C 20.38,57.50,20.69,56.95,20.13,57.50 C 19.58,58.05,18.11,59.37,17.50,59.80 C 16.89,60.23,17.33,60.03,16.50,60.07 C 15.67,60.10,13.40,59.93,12.50,60.00 C 11.60,60.08,11.41,60.25,11.09,60.50 C 10.76,60.75,10.67,60.67,10.56,61.50 C 10.45,62.33,10.44,64.00,10.43,65.50 C 10.42,67.00,10.40,69.33,10.52,70.50 C 10.63,71.67,10.79,72.08,11.12,72.50 C 11.45,72.92,11.94,72.93,12.50,73.04 C 13.06,73.15,13.17,73.11,14.50,73.16 C 15.83,73.21,19.00,73.35,20.50,73.31 C 22.00,73.27,22.44,73.21,23.50,72.91 C 24.56,72.61,25.52,72.35,26.85,71.50 C 28.19,70.65,30.33,69.15,31.50,67.82 C 32.67,66.49,32.47,67.22,33.87,63.50 C 35.27,59.78,38.36,49.83,39.91,45.50 C 41.46,41.17,41.84,40.33,43.18,37.50 C 44.51,34.67,46.79,30.50,47.91,28.50 C 49.03,26.50,49.12,26.58,49.89,25.50 C 50.65,24.42,51.73,22.84,52.50,22.05 C 53.27,21.26,53.83,20.94,54.50,20.78 C 55.17,20.61,56.00,20.86,56.50,21.05 C 57.00,21.24,56.93,21.34,57.50,21.91 C 58.07,22.48,58.45,22.73,59.90,24.50 C 61.34,26.27,64.21,29.83,66.16,32.50 C 68.11,35.17,68.82,36.00,71.61,40.50 C 74.41,45.00,80.41,55.00,82.94,59.50 C 85.46,64.00,86.02,65.83,86.75,67.50 C 87.48,69.17,87.16,68.67,87.30,69.50 C 87.44,70.33,87.62,71.67,87.61,72.50 C 87.59,73.33,87.45,73.83,87.19,74.50 C 86.94,75.17,86.42,76.00,86.10,76.50 C 85.77,77.00,85.67,77.16,85.24,77.50 C 84.81,77.84,84.12,78.39,83.50,78.54 C 82.88,78.70,82.17,78.61,81.50,78.43 C 80.83,78.26,80.07,77.99,79.47,77.50 C 78.87,77.01,78.27,76.17,77.88,75.50 C 77.49,74.83,77.26,74.17,77.13,73.50 C 77.00,72.83,76.94,72.67,77.09,71.50 C 77.24,70.33,77.90,67.67,78.03,66.50 C 78.15,65.33,78.93,66.58,77.85,64.50 C 76.76,62.42,72.72,55.96,71.50,54.03 C 70.28,52.10,70.83,53.13,70.50,52.92 C 70.17,52.71,69.83,52.61,69.50,52.78 C 69.17,52.95,69.19,52.66,68.50,53.94 C 67.81,55.23,66.05,58.91,65.36,60.50 C 64.66,62.09,64.75,61.83,64.33,63.50 C 63.90,65.17,63.05,68.83,62.79,70.50 C 62.53,72.17,62.55,72.00,62.76,73.50 C 62.96,75.00,63.73,78.25,64.02,79.50 C 64.31,80.75,64.09,80.14,64.50,80.98 C 64.91,81.81,65.78,83.43,66.45,84.50 C 67.12,85.57,67.82,86.58,68.50,87.41 C 69.18,88.24,69.69,88.81,70.53,89.50 C 71.36,90.19,72.17,90.85,73.50,91.53 C 74.83,92.21,77.00,93.17,78.50,93.58 C 80.00,93.98,81.33,93.90,82.50,93.95 C 83.67,93.99,84.17,94.17,85.50,93.84 C 86.83,93.50,89.33,92.45,90.50,91.93 C 91.67,91.40,91.67,91.31,92.50,90.69 C 93.33,90.06,94.67,89.01,95.50,88.19 C 96.33,87.36,96.83,86.71,97.50,85.75 C 98.17,84.79,98.96,83.46,99.50,82.42 C 100.04,81.38,100.39,80.65,100.75,79.50 C 101.10,78.35,101.48,77.33,101.64,75.50 C 101.80,73.67,102.04,70.83,101.72,68.50 C 101.40,66.17,100.75,64.17,99.73,61.50 C 98.72,58.83,98.49,57.65,95.62,52.50 C 92.74,47.35,86.38,36.58,82.50,30.58 C 78.62,24.58,75.18,20.18,72.32,16.50 C 69.46,12.82,67.13,10.35,65.32,8.50 C 63.52,6.65,62.47,6.08,61.50,5.39 C 60.53,4.70,60.17,4.59,59.50,4.34 C 58.83,4.09,58.33,4.01,57.50,3.91 C 56.67,3.81,55.50,3.69,54.50,3.74 C 53.50,3.78,52.67,3.76,51.50,4.18 Z" mask="url(#intro-masira-left)"/>
+<path d="M 105.50,4.33 C 104.24,4.79,103.70,4.97,101.93,6.50 C 100.17,8.03,97.13,10.95,94.89,13.50 C 92.65,16.05,89.73,20.09,88.50,21.78 C 87.27,23.47,87.70,23.20,87.50,23.65 C 87.30,24.10,87.29,24.19,87.30,24.50 C 87.31,24.81,86.52,23.77,87.55,25.50 C 88.58,27.23,92.34,33.09,93.50,34.86 C 94.66,36.63,94.17,35.88,94.50,36.12 C 94.83,36.36,95.17,36.41,95.50,36.31 C 95.83,36.20,94.67,37.80,96.50,35.48 C 98.33,33.15,104.50,24.77,106.50,22.36 C 108.50,19.96,108.00,21.29,108.50,21.03 C 109.00,20.78,109.17,20.84,109.50,20.83 C 109.83,20.82,110.17,20.86,110.50,21.00 C 110.83,21.13,111.00,21.17,111.50,21.63 C 112.00,22.10,112.75,22.83,113.50,23.81 C 114.25,24.79,114.62,25.05,116.00,27.50 C 117.38,29.95,120.28,35.33,121.79,38.50 C 123.30,41.67,123.62,42.42,125.07,46.50 C 126.52,50.58,129.43,59.87,130.50,62.99 C 131.57,66.11,130.96,64.30,131.50,65.22 C 132.04,66.13,132.98,67.62,133.75,68.50 C 134.52,69.38,135.32,69.94,136.11,70.50 C 136.90,71.06,137.60,71.44,138.50,71.85 C 139.40,72.26,139.33,72.75,141.50,72.97 C 143.67,73.19,149.67,73.15,151.50,73.16 C 153.33,73.17,152.19,73.13,152.50,73.02 C 152.81,72.91,153.17,72.75,153.38,72.50 C 153.58,72.25,153.65,72.67,153.74,71.50 C 153.83,70.33,153.91,67.17,153.93,65.50 C 153.94,63.83,153.90,62.33,153.83,61.50 C 153.76,60.67,153.72,60.75,153.50,60.50 C 153.28,60.26,153.50,60.15,152.50,60.01 C 151.50,59.87,148.67,59.96,147.50,59.68 C 146.33,59.40,146.09,58.86,145.50,58.33 C 144.91,57.80,144.56,57.64,143.96,56.50 C 143.35,55.36,142.94,54.50,141.87,51.50 C 140.80,48.50,138.94,42.17,137.55,38.50 C 136.16,34.83,135.00,32.50,133.53,29.50 C 132.06,26.50,130.07,22.83,128.73,20.50 C 127.40,18.17,126.72,17.22,125.51,15.50 C 124.31,13.78,122.50,11.45,121.50,10.20 C 120.50,8.95,120.67,8.96,119.50,8.00 C 118.33,7.04,116.17,5.16,114.50,4.45 C 112.83,3.73,111.00,3.74,109.50,3.72 C 108.00,3.70,106.76,3.86,105.50,4.33 Z" mask="url(#intro-masira-right)"/>
+</g>
+</svg>
+    <span class="brand-name" aria-hidden="true">MASIRA</span>
+  </h1>
+  <div class="brand-subtitle">PAPER MILL COMPANY</div>
+  <div class="intro-baseline"><span data-fr="Le papier a un avenir.">Paper has a future.</span><span data-fr="RECYCLAGE · MAROC" data-ar="إعادة التدوير · المغرب">RECYCLING · MOROCCO</span></div>
+  <a class="intro-scroll" href="#cycle"><span data-fr="DÉFILER POUR DÉCOUVRIR">SCROLL TO DISCOVER</span><i>↓</i></a>
+</section>
+<section id="cycle" class="film-section" aria-label="Le cycle du papier">
+  <div class="film-stage">
+    <picture><source media="(max-width:700px)" srcset="assets/machine-mobile/frame-0001.webp">
+    <img class="film-poster" src="assets/machine-v7/frame-0001.webp?v=7" alt="Ligne industrielle de recyclage du papier" fetchpriority="high"></picture>
+    <canvas id="film-canvas" aria-label="Animation de la ligne de production, contrôlée par le défilement"></canvas>
+    <div class="film-shade"></div>
+    <div class="film-story-shade" aria-hidden="true"></div>
+    <div class="film-heading"><span class="film-eyebrow" data-fr="L’ART DE LA TRANSFORMATION">THE ART OF TRANSFORMATION</span><h2 data-fr="La précision.<br><em>En mouvement.</em>">Precision.<br><em>In motion.</em></h2></div>
+    <div class="film-caption"><span data-fr="UNE MATIÈRE. DES POSSIBILITÉS INFINIES.">ONE MATERIAL. INFINITE POSSIBILITIES.</span><span class="film-counter">001 / 419</span></div>
+    <div class="film-track"><i></i></div>
+  </div>
+<div class="film-stories">
+<div class="film-opening" aria-hidden="true"></div>
+<section class="film-proof" aria-label="Masira en chiffres"><article class="film-card proof-card"><span class="film-eyebrow" data-fr="AL MASSIRA · KÉNITRA, MAROC" data-ar="المسيرة · القنيطرة، المغرب">AL MASSIRA · KENITRA, MOROCCO</span><h2 data-fr="Le futur du papier<br><em>se mesure concrètement.</em>">The future of paper<br><em>made tangible.</em></h2><div class="proof-grid"><div><strong>$50M+</strong><span data-fr="Investissement durable">Sustainable investment</span></div><div><strong>120K</strong><span data-fr="Tonnes par an">Tons per year</span></div><div><strong>100%</strong><span data-fr="Fibre recyclée">Recycled fibre</span></div></div></article></section>
+<section id="vision" class="film-vision"><article class="film-card"><span class="film-eyebrow" data-fr="02 / NOTRE VISION">02 / OUR VISION</span><h2 data-fr="<span class=&quot;reveal-line&quot;><span>Rien ne se perd.</span></span><span class=&quot;reveal-line&quot;><span><em>Tout recommence.</em></span></span>"><span class="reveal-line"><span>Nothing is lost.</span></span><span class="reveal-line"><span><em>Everything begins again.</em></span></span></h2><p data-fr="Nous donnons au papier une nouvelle vie. Avec exigence, précision et une vision claire de demain.">We give paper a new life. With care, precision and a clear vision of tomorrow.</p></article></section>
+<section id="products" class="film-content-section film-products"><article class="film-card"><span class="film-eyebrow" data-fr="03 / PRODUITS">03 / PRODUCTS</span><h2 data-fr="Des cartons recyclés<br><em>pour la suite.</em>">Recycled boards<br><em>for what’s next.</em></h2><p data-fr="Des cartons performants pour les emballages modernes, fabriqués avec des fibres recyclées.">High-performance boards for modern packaging, made with recycled fibre.</p></article></section>
+<section id="contact" class="film-contact"><article class="film-card"><span class="film-eyebrow" data-fr="CONSTRUISONS LA SUITE">LET’S BUILD WHAT COMES NEXT</span><h2 data-fr="<span class=&quot;reveal-line&quot;><span>L’avenir</span></span><span class=&quot;reveal-line&quot;><span><em>commence ici.</em></span></span>" data-ar="<span class=&quot;reveal-line&quot;><span>المستقبل</span></span><span class=&quot;reveal-line&quot;><span><em>يبدأ هنا.</em></span></span>"><span class="reveal-line"><span>The future</span></span><span class="reveal-line"><span><em>starts here.</em></span></span></h2><p class="contact-address"><strong data-fr="Al Massira Paper Mills" data-ar="مصانع ورق المسيرة">Al Massira Paper Mills</strong><br>8J25+FVV, AFZ<br><span data-fr="Kénitra, Maroc" data-ar="القنيطرة، المغرب">Kénitra, Morocco</span></p><button id="open-inquiry" class="journey-inquiry" data-inquiry data-fr="Demander un devis ↗" data-ar="اطلب عرض سعر ↗">Request a quote ↗</button></article></section>
+</div>
+<footer><a class="logo" href="#"><img src="assets/brand/masira-logo.png" alt="Masira"></a><span data-fr="Le papier a un avenir.">Paper has a future.</span><span>© <span id="year">2026</span> MASIRA</span><button id="motion-toggle" aria-pressed="false">Pause animation</button><a href="#" class="back-top" aria-label="Retour en haut">↑</a></footer>
+</section>
 </main>
-<dialog id="inquiry-dialog"><button class="close-dialog" aria-label="Fermer">×</button><span class="eyebrow" data-en="LET'S START HERE">COMMENÇONS ICI</span><h2 data-en="Your next<br><em>chapter.</em>">Votre prochain<br><em>chapitre.</em></h2><p class="dialog-intro" data-en="Prepare your brief to share with the Masira team. Downloading it does not send a message.">Préparez votre brief à partager avec l’équipe Masira. Le téléchargement n’envoie aucun message.</p><form id="inquiry-form"><label><span data-en="Your name / Company">Votre nom / Entreprise</span><input name="name" autocomplete="organization" required maxlength="120"></label><label><span data-en="Your email">Votre e-mail</span><input name="email" type="email" autocomplete="email" required maxlength="160"></label><label><span data-en="Your project">Votre projet</span><textarea name="message" rows="3" required maxlength="3000"></textarea></label><button type="submit" class="submit-button" data-en="Download my brief ↗">Télécharger mon brief ↗</button><p id="form-status" role="status"></p></form></dialog>
+<dialog id="inquiry-dialog" aria-labelledby="inquiry-title">
+<button class="close-dialog" aria-label="Close">&times;</button>
+<span class="eyebrow" data-fr="Demander un devis" data-ar="اطلب عرض سعر">Request a quote</span>
+<h2 id="inquiry-title" data-fr="Dites-nous ce que<br><em>vous devez emballer.</em>" data-ar="أخبرنا بما<br><em>تحتاج إلى تغليفه.</em>">Tell us what<br><em>you need to pack.</em></h2>
+<p class="dialog-intro" data-fr="Envoyez votre besoin à l'équipe Masira — qualité, grammage et volume. Nous répondons sous deux jours ouvrés." data-ar="أرسل متطلباتك إلى فريق مصيرة — النوع والغراماج والكمية. نردّ خلال يومَي عمل.">Send your requirement to the Masira team — grade, grammage and volume. We reply within two business days.</p>
+<form id="inquiry-form">
+<input type="hidden" name="access_key" value="REMPLACER_PAR_VOTRE_CLE_WEB3FORMS">
+<input type="hidden" name="subject" value="masirapapermill.com — new quote request">
+<input type="hidden" name="from_name" value="Masira website">
+<input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+<div class="row">
+<label><span data-fr="Votre nom" data-ar="اسمك">Your name</span><input name="name" autocomplete="name" required maxlength="120"></label>
+<label><span data-fr="Entreprise" data-ar="الشركة">Company</span><input name="company" autocomplete="organization" required maxlength="120"></label>
+</div>
+<div class="row">
+<label><span data-fr="E-mail" data-ar="البريد الإلكتروني">Email</span><input name="email" type="email" autocomplete="email" required maxlength="160"></label>
+<label><span data-fr="Téléphone (facultatif)" data-ar="الهاتف (اختياري)">Phone (optional)</span><input name="phone" type="tel" autocomplete="tel" maxlength="40"></label>
+</div>
+<div class="row">
+<label><span data-fr="Produit" data-ar="المنتج">Product</span><select name="product">
+<option data-fr="Testliner" data-ar="لاينر">Testliner</option>
+<option data-fr="Fluting" data-ar="فلوتينغ">Fluting</option>
+<option data-fr="Les deux" data-ar="كلاهما">Both</option>
+<option data-fr="À déterminer" data-ar="غير محدد بعد">Not sure yet</option>
+</select></label>
+<label><span data-fr="Volume (t/an)" data-ar="الكمية (طن/سنة)">Volume (t/year)</span><input name="volume" inputmode="numeric" maxlength="40" placeholder="2,000"></label>
+</div>
+<label><span data-fr="Votre besoin" data-ar="متطلباتك">Your requirement</span><textarea name="message" rows="3" required maxlength="3000"></textarea></label>
+<button type="submit" class="submit-button" data-fr="Envoyer ma demande ↗" data-ar="أرسل طلبي ↗">Send my request ↗</button>
+<p id="form-status" role="status" aria-live="polite"></p>
+</form>
+</dialog>
+<footer class="site-footer"><div class="site-footer-grid"><div class="footer-cta"><span class="film-eyebrow" data-fr="MASIRA / KÉNITRA" data-ar="مصيرة / القنيطرة">MASIRA / KENITRA</span><h2 data-fr="Le papier a un<br><em>avenir.</em>" data-ar="للورق<br><em>مستقبل.</em>">Paper has a<br><em>future.</em></h2><a class="footer-action" href="#devis" data-inquiry data-fr="Demander un devis ↗" data-ar="اطلب عرض سعر ↗">Request a quote ↗</a></div><div class="footer-location"><div class="footer-location-head"><span data-fr="LOCALISATION" data-ar="الموقع">LOCATION</span><span>34°15′N · 6°35′W</span></div><a class="location-map" href="https://www.google.com/maps/search/?api=1&amp;query=Al+Massira+Paper+Mills+Kenitra+Morocco" target="_blank" rel="noreferrer" aria-label="Open Al Massira Paper Mills in Google Maps"><i class="map-road map-road-a"></i><i class="map-road map-road-b"></i><i class="map-road map-road-c"></i><b class="map-pin">●</b><span class="map-label" data-fr="KÉNITRA" data-ar="القنيطرة">KENITRA</span></a><p><span data-fr="Al Massira Paper Mills" data-ar="مصانع ورق المسيرة">Al Massira Paper Mills</span><br>8J25+FVV, AFZ · <span data-fr="Kénitra, Maroc" data-ar="القنيطرة، المغرب">Kénitra, Morocco</span></p></div></div><div class="site-footer-bottom"><a class="logo" href="#"><img src="assets/brand/masira-logo.png" alt="MASIRA"></a><span data-fr="Le papier a un avenir." data-ar="للورق مستقبل.">Paper has a future.</span><span>© <span id="footer-year">2026</span> MASIRA</span><button id="footer-motion" type="button">Pause animation</button></div></footer>
+<section class="footer-info"><div class="footer-info-nav"><span data-fr="EXPLORER" data-ar="استكشف">EXPLORE</span><a href="about.html" data-fr="Direction" data-ar="القيادة">Leadership</a><a href="#vision" data-fr="Mission &amp; Vision" data-ar="الرسالة والرؤية">Mission &amp; Vision</a><a href="#devis" data-inquiry data-fr="Nous contacter" data-ar="تواصل معنا">Contact Us</a></div><div class="footer-info-contact"><span data-fr="NOUS CONTACTER" data-ar="تواصل معنا">CONTACT US</span><a href="mailto:info@masirapapermill.com">info@masirapapermill.com</a><p data-fr="Free Industrial Zone Lot I1-282<br>Atlantic Free Zone Tf13025/70<br>Maroc" data-ar="المنطقة الصناعية الحرة، القطعة I1-282<br>المنطقة الحرة الأطلسية Tf13025/70<br>المغرب">Free Industrial Zone Lot I1-282<br>Atlantic Free Zone Tf13025/70<br>Morocco</p></div><p class="footer-info-description" data-fr="Al Massira recycle les déchets en cartons durables grâce aux énergies renouvelables, portant la transformation verte avec un investissement de 50 M$." data-ar="تعيد المسيرة تدوير النفايات إلى ألواح مستدامة باستخدام الطاقة المتجددة، وتدفع التحول الأخضر باستثمار قدره 50 مليون دولار.">Al Massira recycles waste into sustainable boards using renewables, driving green transformation with a $50M investment.</p></section><div class="footer-legal">© 2026 zaurinoweb · All rights reserved · Special offer for MASIRA</div>
+<div class="footer-brand-bottom"><img src="assets/brand/masira-logo.png" alt="MASIRA"><span data-fr="Le papier a un avenir." data-ar="للورق مستقبل.">Paper has a future.</span><span>© 2026 MASIRA</span></div>
 </body></html>

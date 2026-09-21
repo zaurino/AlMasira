@@ -1,15 +1,18 @@
 import * as THREE from './assets/three.module.js';
+import {createEngineering} from './engineering-world.js';
+import {finishMaterials,createRendering} from './engineering-render.js';
+import {RoundedBoxGeometry} from './assets/addons/geometries/RoundedBoxGeometry.js';
 
-// An illustrative Fourdrinier line. Every module has a reversible assembly path.
+// Scroll-directed journey through a working, illustrative paper recycling line.
 const host = document.querySelector('#machine-viewport');
 const canvas = document.querySelector('#machine-canvas');
 const clamp = THREE.MathUtils.clamp;
 const smooth = (x) => { x=clamp(x,0,1); return x*x*(3-2*x); };
-const assembly = { progress:0, paused:matchMedia('(prefers-reduced-motion: reduce)').matches };
+const assembly = { progress:0, framing:0, paused:matchMedia('(prefers-reduced-motion: reduce)').matches };
 const chapters = [
-  ['Tout commence par une base.','La structure prend place. Chaque élément trouve sa position dans la ligne.','Everything starts with a foundation.','The structure takes shape. Every component finds its place in the line.','STRUCTURE','STRUCTURE'],
+  ['Le papier retrouve ses fibres.','Dans le pulpeur, le papier récupéré est brassé avec de l’eau. La pâte est ensuite épurée avant de rejoindre la machine.','Paper returns to its fibres.','Recovered paper is mixed with water in the pulper. The pulp is then cleaned before entering the paper machine.','MISE EN PÂTE','PULPING'],
   ['La fibre devient une feuille.','La pâte se répartit sur une toile en mouvement. L’eau s’évacue, les fibres se lient.','Fibre becomes a sheet.','Pulp spreads across a moving wire. Water drains away and the fibres come together.','TABLE DE FORMATION','FORMING SECTION'],
-  ['Sous pression, elle prend corps.','Les rouleaux de presse se mettent en place pour extraire l’eau de la feuille humide.','Under pressure, it takes shape.','The press rolls settle into place to remove water from the wet sheet.','PRESSES','PRESS SECTION'],
+  ['Sous pression, elle prend corps.','Entre les rouleaux, le feutre accompagne la feuille. La pression extrait une partie de l’eau et consolide les fibres.','Under pressure, it takes shape.','The felt carries the sheet between press rolls. Pressure removes water and consolidates the fibres.','PRESSES','PRESS SECTION'],
   ['La chaleur fait son œuvre.','La feuille suit les cylindres de séchage. L’humidité restante s’évapore.','Heat does its work.','The sheet travels around the dryer cylinders. The remaining moisture evaporates.','CYLINDRES SÉCHEURS','DRYER CYLINDERS'],
   ['Une nouvelle vie. En mouvement.','La ligne s’anime. Le papier avance et s’enroule : une nouvelle matière est née.','A new life. In motion.','The line comes alive. Paper travels through and winds onto a reel: a new material is born.','BOBINEUSE','REELING SECTION'],
 ];
@@ -32,36 +35,37 @@ function updateCopy(index,progress){
   document.querySelector('#machine-title').textContent=c[en?2:0];
   document.querySelector('#machine-copy').textContent=c[en?3:1];
   document.querySelector('#machine-part-label b').textContent=`0${index+1} — ${c[en?5:4]}`;
-  document.querySelector('#machine-percent').textContent=`${Math.round(clamp(progress/.91,0,1)*100)}%`;
+  document.querySelector('#machine-percent').textContent=`${Math.round(clamp(progress,0,1)*100)}%`;
   document.querySelectorAll('[data-stage]').forEach((b,i)=>{
     b.classList.toggle('is-active',i===index); b.classList.toggle('is-complete',i<index);
     b.setAttribute('aria-current',i===index?'step':'false');
-    b.style.setProperty('--chapter-progress',`${clamp((progress-i*.2)*5,0,1)*100}%`);
+    const bounds=[0,.15,.30,.48,.80,1];
+    b.style.setProperty('--chapter-progress',`${clamp((progress-bounds[i])/(bounds[i+1]-bounds[i]),0,1)*100}%`);
   });
 }
 
 function init(){
   document.querySelector('.machine-fallback').hidden=true;
-  renderer.setPixelRatio(Math.min(devicePixelRatio,1.65));
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2.5));
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure=1.35;
+  renderer.toneMappingExposure=1.05;
   renderer.shadowMap.enabled=true;
   renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   const scene=new THREE.Scene();
   const camera=new THREE.PerspectiveCamera(33,1,.1,160);
   const root=new THREE.Group(); scene.add(root);
-  const ambient=new THREE.HemisphereLight(0xe4f2ec,0x35594c,3);scene.add(ambient);
-  const key=new THREE.DirectionalLight(0xffead0,5);key.position.set(-6,13,10);key.castShadow=true;
-  key.shadow.mapSize.set(2048,2048);Object.assign(key.shadow.camera,{left:-14,right:14,top:12,bottom:-12,near:1,far:45});key.shadow.bias=-.001;key.shadow.normalBias=.035;scene.add(key);
-  const rim=new THREE.DirectionalLight(0xbaffdf,4);rim.position.set(4,7,-9);scene.add(rim);
-  const fill=new THREE.DirectionalLight(0xffffff,2);fill.position.set(10,3,4);scene.add(fill);
+  const ambient=new THREE.HemisphereLight(0xe7e8e5,0x62665f,1.15);scene.add(ambient);
+  const key=new THREE.DirectionalLight(0xffffff,3.1);key.position.set(-6,13,10);key.castShadow=true;
+  key.shadow.mapSize.set(4096,4096);Object.assign(key.shadow.camera,{left:-14,right:14,top:12,bottom:-12,near:1,far:45});key.shadow.bias=-.001;key.shadow.normalBias=.035;scene.add(key);
+  const rim=new THREE.DirectionalLight(0xe6eceb,1.8);rim.position.set(4,7,-9);scene.add(rim);
+  const fill=new THREE.DirectionalLight(0xffffff,1.0);fill.position.set(10,3,4);scene.add(fill);
   const floor=new THREE.Mesh(new THREE.PlaneGeometry(100,100),new THREE.ShadowMaterial({opacity:.3}));floor.rotation.x=-Math.PI/2;floor.position.y=-.48;floor.receiveShadow=true;scene.add(floor);
   const mat={
-    frame:new THREE.MeshStandardMaterial({color:0x397769,metalness:.65,roughness:.35}),
+    frame:new THREE.MeshPhysicalMaterial({clearcoat:.16,clearcoatRoughness:.4,color:0x397769,metalness:.65,roughness:.35}),
     dark:new THREE.MeshStandardMaterial({color:0x1a3731,metalness:.55,roughness:.45}),
-    steel:new THREE.MeshStandardMaterial({color:0xd4ded8,metalness:.77,roughness:.27}),
-    chrome:new THREE.MeshStandardMaterial({color:0xedf1e9,metalness:.85,roughness:.19}),
+    steel:new THREE.MeshPhysicalMaterial({anisotropy:.65,anisotropyRotation:Math.PI/2,color:0xd4ded8,metalness:.77,roughness:.27}),
+    chrome:new THREE.MeshPhysicalMaterial({anisotropy:.4,color:0xedf1e9,metalness:.85,roughness:.19}),
     rubber:new THREE.MeshStandardMaterial({color:0x283833,metalness:.1,roughness:.8}),
     brass:new THREE.MeshStandardMaterial({color:0xce9463,metalness:.65,roughness:.3}),
     paper:new THREE.MeshStandardMaterial({color:0xf4edcf,metalness:0,roughness:.9,side:THREE.DoubleSide}),
@@ -69,10 +73,12 @@ function init(){
     orange:new THREE.MeshStandardMaterial({color:0xe47a42,metalness:.28,roughness:.35}),
     light:new THREE.MeshStandardMaterial({color:0xd6e99b,emissive:0xa7d86e,emissiveIntensity:.8}),
   };
+  finishMaterials(mat);
+  const presentation=createRendering(renderer,scene,camera);
   const moving=[],rollers=[];
-  function box(g,x,y,z,sx,sy,sz,m){const o=new THREE.Mesh(new THREE.BoxGeometry(sx,sy,sz),m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;g.add(o);return o;}
-  function cylinder(g,x,y,z,r,len,m,segments=40){const o=new THREE.Mesh(new THREE.CylinderGeometry(r,r,len,segments),m);o.rotation.x=Math.PI/2;o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;g.add(o);return o;}
-  function pipe(g,coords,r,m){const curve=new THREE.CatmullRomCurve3(coords.map(p=>new THREE.Vector3(...p)));const o=new THREE.Mesh(new THREE.TubeGeometry(curve,40,r,8,false),m);g.add(o);o.castShadow=true;return o;}
+  function box(g,x,y,z,sx,sy,sz,m){const o=new THREE.Mesh(new RoundedBoxGeometry(sx,sy,sz,3,Math.min(.015,sx*.1,sy*.1,sz*.1)),m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;g.add(o);return o;}
+  function cylinder(g,x,y,z,r,len,m,segments=40){const o=new THREE.Mesh(new THREE.CylinderGeometry(r,r,len,segments===6?6:Math.max(128,segments)),m);o.rotation.x=Math.PI/2;o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;g.add(o);return o;}
+  function pipe(g,coords,r,m){const curve=new THREE.CatmullRomCurve3(coords.map(p=>new THREE.Vector3(...p)));const o=new THREE.Mesh(new THREE.TubeGeometry(curve,80,r,16,false),m);g.add(o);o.castShadow=true;return o;}
   function part(start,duration,flight=[0,7,0],turn=[0,0,0]){const g=new THREE.Group();root.add(g);moving.push({g,start,duration,flight:new THREE.Vector3(...flight),turn:new THREE.Vector3(...turn)});return g;}
   function roller(g,x,y,r,m,len=2.8){
     const group=new THREE.Group();group.position.set(x,y,0);g.add(group);
@@ -99,10 +105,30 @@ function init(){
     box(g,x,.32,0,.18,.25,3.5,mat.steel);
     for(const z of [-1.6,1.6]){box(g,x,.17,z,.2,1.0,.2,mat.frame);box(g,x,-.32,z,.5,.12,.45,mat.steel);for(const dx of [-.15,.15])cylinder(g,x+dx,-.23,z,.036,.035,mat.chrome,6);}
   }
-  const walkway=part(.13,.18,[0,0,5]);box(walkway,0,.62,2.0,18.5,.08,.58,mat.steel);
+  const walkway=part(.13,.18,[0,0,5]);walkway.userData.reveal={module:1,role:"support",direction:1};box(walkway,0,.62,2.0,18.5,.08,.58,mat.steel);
   for(let x=-9;x<=9;x+=.25)box(walkway,x,.672,2,.035,.012,.53,mat.dark);
   rail(walkway,-9,9,1.65,2.3);
   for(let i=0;i<4;i++)box(walkway,-9.2-i*.22,.48-i*.18,2,.32,.08,.7,mat.steel);
+
+  // Open pulper, agitator, recovered sheets and transfer pipe.
+  const pulper=part(0,1);
+  const tank=new THREE.Mesh(new THREE.CylinderGeometry(1.18,.9,1.8,128,1,true),mat.steel);
+  tank.position.set(-10.6,1.45,0);pulper.add(tank);tank.castShadow=true;
+  const pulp=new THREE.Mesh(new THREE.CylinderGeometry(1.09,1.09,.07,64),mat.wet);
+  pulp.position.set(-10.6,2.03,0);pulper.add(pulp);
+  for(const y of [.55,2.34]){const ring=new THREE.Mesh(new THREE.TorusGeometry(y>.6?1.18:.9,.055,10,64),mat.chrome);ring.rotation.x=Math.PI/2;ring.position.set(-10.6,y,0);pulper.add(ring);}
+  for(const z of [-.7,.7])box(pulper,-10.6,.3,z,.18,.6,.18,mat.frame);
+  box(pulper,-10.6,2.4,0,2.7,.14,.2,mat.frame);
+  pipe(pulper,[[-10.6,.75,0],[-9.7,.65,-1.7],[-9,.9,-1.7],[-8.7,1.65,-1]],.16,mat.steel);
+  const agitator=new THREE.Group();agitator.position.set(-10.6,2.1,0);pulper.add(agitator);
+  box(agitator,0,0,0,1.8,.07,.14,mat.chrome);box(agitator,0,0,0,.14,.07,1.8,mat.chrome);
+  const scraps=[];
+  for(let i=0;i<22;i++){const a=i*2.4,r=.25+(i%5)*.15;const sheet=box(pulper,-10.6+Math.cos(a)*r,2.09+(i%3)*.015,Math.sin(a)*r,.12+(i%3)*.04,.012,.12,mat.paper);sheet.rotation.y=a;scraps.push(sheet);}
+  // Visible motor housings and cooling fins along the service side.
+  for(const x of [-2.6,-1.5,.15,2.35,4.55]){
+    cylinder(base,x,.85,-2,.24,.55,mat.frame);
+    for(let z=-2.25;z<-1.8;z+=.075)cylinder(base,x,.85,z,.27,.025,mat.dark,24);
+  }
 
   // 02 — headbox, drainage table, wire loop and supporting rollers.
   const head=part(.18,.16,[-5,4,-3],[0,-.5,0]);
@@ -110,7 +136,7 @@ function init(){
   box(head,-8.15,2.34,0,1.28,.08,3.12,mat.frame);
   for(let z=-1.2;z<=1.2;z+=.3)box(head,-8.1,2.41,z,.85,.09,.025,mat.chrome);
   pipe(head,[[-9.1,.4,-1],[-9.1,1.4,-1],[-8.75,1.7,-1]],.2,mat.steel);
-  const bed=part(.2,.18,[-4,3,0],[0,0,-.12]);
+  const bed=part(.2,.18,[-4,3,0],[0,0,-.12]);bed.userData.reveal={module:1,role:"roller",direction:-1};
   box(bed,-5.8,1.02,0,4.8,.22,3.2,mat.frame);
   for(let x=-7.6;x<=-3.7;x+=.43)roller(bed,x,1.24,.14,mat.chrome);
   for(const z of [-1.5,1.5]){box(bed,-5.8,1.29,z,4.6,.21,.12,mat.steel);}
@@ -121,18 +147,18 @@ function init(){
   // 03 — paired press nips, bearing housings and the calender frame.
   for(let i=0;i<2;i++){
     const x=-2.6+i*1.1;
-    const frame=part(.37+i*.02,.16,[0,5,i?-4:4],[0,0,.13]);
+    const frame=part(.37+i*.02,.16,[0,5,i?-4:4],[0,0,.13]);frame.userData.reveal={module:2,role:"support",direction:-1};
     for(const z of [-1.7,1.7]){box(frame,x,1.75,z,.24,2.6,.27,mat.frame);box(frame,x,3.03,z,.7,.17,.45,mat.steel);box(frame,x,2.77,z,.15,.3,.17,mat.chrome);bearing(frame,x,1.1,z);bearing(frame,x,2.12,z);}
-    const lower=part(.39+i*.025,.15,[0,-.8,5],[.35,0,0]);roller(lower,x,1.08,.49,mat.rubber);
-    const upper=part(.43+i*.025,.16,[0,6,-1],[.7,0,0]);roller(upper,x,2.08,.49,mat.chrome);
+    const lower=part(.39+i*.025,.15,[0,-.8,5],[.35,0,0]);lower.userData.reveal={module:2,role:"roller",direction:1};roller(lower,x,1.08,.49,mat.rubber);
+    const upper=part(.43+i*.025,.16,[0,6,-1],[.7,0,0]);upper.userData.reveal={module:2,role:"roller",direction:-1};roller(upper,x,2.08,.49,mat.chrome);
   }
 
   // 04 — staggered steam-heated dryer cylinders and service piping.
   for(let i=0;i<5;i++){
     const x=.15+i*1.1,y=i%2?2.38:1.2;
-    const supports=part(.53+i*.027,.15,[0,3,-5],[0,.2,0]);
+    const supports=part(.53+i*.027,.15,[0,3,-5],[0,.2,0]);supports.userData.reveal={module:3,role:"support",direction:-1};
     for(const z of [-1.68,1.68]){box(supports,x,(y+.4)/2,z,.24,y-.4,.22,mat.frame);bearing(supports,x,y,z);}
-    const roll=part(.55+i*.028,.17,[(i-2)*.8,6+(i%2),i%2?-3:3],[.5,0,.1]);roller(roll,x,y,.67,mat.steel);
+    const roll=part(.55+i*.028,.17,[(i-2)*.8,6+(i%2),i%2?-3:3],[.5,0,.1]);roll.userData.reveal={module:3,role:"roller",direction:i%2?-1:1};roller(roll,x,y,.67,mat.steel);
     pipe(supports,[[x,y,-1.9],[x,y,-2.1],[x,.7,-2.1]],.07,mat.brass);
   }
   const ducts=part(.68,.16,[2,5,-4],[0,.2,0]);
@@ -143,7 +169,7 @@ function init(){
   const reelFrame=part(.76,.15,[5,0,-4],[0,-.4,0]);
   for(const z of [-1.65,1.65]){box(reelFrame,7.15,1.28,z,.27,1.6,.35,mat.frame);box(reelFrame,7.1,2.0,z,2,.14,.35,mat.steel);bearing(reelFrame,7.2,2.04,z);}
   roller(reelFrame,6,1.2,.55,mat.chrome);
-  const reel=part(.81,.13,[3,7,1],[.5,.1,0]);
+  const reel=part(.81,.13,[3,7,1],[.5,.1,0]);reel.userData.reveal={module:4,role:"roller",direction:-1};
   const paperRoll=roller(reel,7.25,2.13,.91,mat.paper,2.75);
   for(const z of [-1.39,1.39]){
     // Concentric end-grain rings make the reel read as rolled paper.
@@ -170,7 +196,7 @@ function init(){
   const web=new THREE.Mesh(paperGeo,mat.paper);root.add(web);web.castShadow=true;web.receiveShadow=true;
   // Translucent lines travelling on the wire convey a running material flow.
   const flow=new THREE.Group();root.add(flow);
-  for(let i=0;i<16;i++){const line=box(flow,-7.5+i*.25,1.473,0,.015,.007,2.62,mat.wet);line.userData.offset=i/16;}
+  for(let i=0;i<16;i++){const line=box(flow,-7.5+i*.25,1.508,0,.015,.007,2.62,mat.wet);line.userData.offset=i/16;}
 
   const plate=part(.15,.18,[0,0,4]);box(plate,-5.8,.78,1.765,1.9,.31,.025,mat.paper);
   // Canvas texture is a functional equipment nameplate, not an image asset.
@@ -178,16 +204,15 @@ function init(){
   const texture=new THREE.CanvasTexture(sign);texture.colorSpace=THREE.SRGBColorSpace;
   const plaque=new THREE.Mesh(new THREE.PlaneGeometry(1.8,.27),new THREE.MeshBasicMaterial({map:texture}));plaque.position.set(-5.8,.79,1.781);plate.add(plaque);
 
+  const engineering=createEngineering({scene,root,camera,mat,rollers,agitator,scraps,pulp,web,tank,moving});
+  const technicalLabels=Array.from({length:2},()=>{const el=document.createElement('div');el.className='engineering-label';host.append(el);return el;});
   let visible=false,dirty=true,last=0,time=0,width=1,height=1,dragging=false,dragX=0,orbit=0,tilt=0;
   const focus=new THREE.Vector3(0,1.15,0);
   const label=document.querySelector('#machine-part-label');
-  const labelPositions=[new THREE.Vector3(-5,.5,1.8),new THREE.Vector3(-5.8,1.5,0),new THREE.Vector3(-2,2.5,0),new THREE.Vector3(2.4,3,0),new THREE.Vector3(7.2,3,0)];
-  function resize(){width=host.clientWidth;height=host.clientHeight;renderer.setSize(width,height,false);camera.aspect=width/height;camera.updateProjectionMatrix();dirty=true;}
+  const labelPositions=[new THREE.Vector3(-10.5,2.5,0),new THREE.Vector3(-5.8,1.5,0),new THREE.Vector3(-2,2.5,0),new THREE.Vector3(2.4,3,0),new THREE.Vector3(7.2,3,0)];
+  function resize(){width=host.clientWidth;height=host.clientHeight;renderer.setSize(width,height,false);presentation.resize(width,height);camera.aspect=width/height;camera.updateProjectionMatrix();dirty=true;}
   new ResizeObserver(resize).observe(host);
   new IntersectionObserver(([e])=>{visible=e.isIntersecting;dirty=true;},{rootMargin:'100px'}).observe(host);
-  canvas.addEventListener('pointerdown',e=>{dragging=true;dragX=e.clientX;canvas.setPointerCapture(e.pointerId);});
-  canvas.addEventListener('pointermove',e=>{if(dragging){orbit=clamp(orbit+(e.clientX-dragX)*.004,-.75,.75);dragX=e.clientX;dirty=true;}});
-  canvas.addEventListener('pointerup',()=>dragging=false);canvas.addEventListener('pointercancel',()=>dragging=false);
   canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();host.classList.add('no-webgl');document.querySelector('.machine-fallback').hidden=false;});
   canvas.addEventListener('webglcontextrestored',()=>{host.classList.remove('no-webgl');document.querySelector('.machine-fallback').hidden=true;dirty=true;});
   addEventListener('masira:machine',e=>{Object.assign(assembly,e.detail);dirty=true;});
@@ -197,30 +222,26 @@ function init(){
     requestAnimationFrame(render);
     if(document.hidden||!visible){last=stamp;return;}
     const dt=Math.min((stamp-last)/1000,.05)||0;last=stamp;
-    if(!assembly.paused)time+=dt;
+    const needsCopy=dirty;
     if(!dirty&&assembly.paused)return;dirty=false;
-    const p=assembly.progress,index=Math.min(4,Math.floor(p*5));
-    updateCopy(index,p);
-    for(const {g,start,duration,flight,turn} of moving){
-      const t=smooth((p-start)/duration);g.visible=t>.005;
-      const remaining=1-t;g.position.copy(flight).multiplyScalar(remaining);g.rotation.set(turn.x*remaining,turn.y*remaining,turn.z*remaining);
-      g.scale.setScalar(.86+.14*t);
+    const p=assembly.progress,index=p<.15?0:p<.30?1:p<.48?2:p<.80?3:4;
+    if(needsCopy)updateCopy(index,p);
+    for(const {g}of moving){g.visible=true;g.position.set(0,0,0);g.rotation.set(0,0,0);g.scale.setScalar(1);}
+    const result=engineering.update(p,width,height,assembly.paused?0:dt);
+    for(let i=0;i<2;i++){
+      const el=technicalLabels[i],entry=result.labels[i];
+      if(!entry){el.hidden=true;continue;}
+      const v=entry.point.clone().project(camera);
+      el.hidden=v.z>1||v.z< -1||Math.abs(v.x)>.87||Math.abs(v.y)>.83;
+      el.textContent=entry.text;el.style.left=`${(v.x*.5+.5)*width+12}px`;el.style.top=`${(-v.y*.5+.5)*height-35-i*35}px`;
     }
-    // Wide establishing view gradually becomes a close, low three-quarter view.
-    const cameraPhase=smooth(p);const azimuth=.20+.31*cameraPhase+orbit;
-    const distance=(width<700?39:32)+(1-cameraPhase)*3;
-    camera.position.set(Math.sin(azimuth)*distance,14-cameraPhase*3.3,Math.cos(azimuth)*distance);
-    camera.lookAt(focus);camera.updateMatrixWorld();
-    root.rotation.y=-.07;
-    const running=smooth((p-.88)/.12);
-    for(const {group,r} of rollers){if(!assembly.paused)group.rotation.z-=dt*running*.8/r;}
-    web.visible=p>.32;paperGeo.setDrawRange(0,Math.floor(clamp((p-.3)/.6,0,1)*(route.length-1))*6);
-    flow.visible=p>.92;
-    for(const strip of flow.children){strip.position.x=-7.55+((strip.userData.offset+time*.15)%1)*3.8;}
+    web.visible=true;paperGeo.setDrawRange(0,Infinity);
+    flow.visible=false;
+    for(const strip of flow.children)strip.position.x=-7.55+((strip.userData.offset+p*24)%1)*3.8;
     const point=labelPositions[index].clone();root.localToWorld(point);point.project(camera);
     label.style.left=`${clamp((point.x*.5+.5)*width,65,width-175)}px`;
     label.style.top=`${clamp((-point.y*.5+.5)*height-64,25,height-90)}px`;
-    renderer.render(scene,camera);
+    presentation.render();
   }
   resize();requestAnimationFrame(render);dispatchEvent(new Event('masira:ready'));
 }
