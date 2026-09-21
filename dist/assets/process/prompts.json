@@ -1,0 +1,35 @@
+{
+  "generator": "Built-in image_gen",
+  "assets": [
+    {
+      "name": "01-machine",
+      "prompt": "Use case: photorealistic-natural. Asset: full screen landscape photograph for a premium paper recycling website. Cinematic industrial documentary photography, believable real factory textures, restrained deep green machinery, silver steel and warm ivory paper, natural side lighting, detailed but not glossy CGI. Wide landscape 16:9. No text, logos, diagram, collage, people or watermarks. Single coherent photograph. Wide establishing view of a complete operating industrial paper recycling machine in a beautiful real factory hall. Long Fourdrinier line, steel rollers, forest green housings, overhead pipes, broad cream paper web, finished jumbo reel. Three-quarter view from service aisle, machine dominates frame, realistic industrial scale, subtle atmospheric daylight.",
+      "path": "/Users/ekaterinabarazduk/.codex/generated_images/01a0a55a-16f3-78e3-a8e2-cbb9a01c4867/exec-2a81d00e-9add-4428-bd8a-e0ac53f41239.png"
+    },
+    {
+      "name": "02-pulp",
+      "prompt": "Use case: photorealistic-natural. Asset: full screen landscape photograph for a premium paper recycling website. Cinematic industrial documentary photography, believable real factory textures, restrained deep green machinery, silver steel and warm ivory paper, natural side lighting, detailed but not glossy CGI. Wide landscape 16:9. No text, logos, diagram, collage, people or watermarks. Single coherent photograph. Close documentary photograph looking down into an open stainless steel industrial hydrapulper. Used off-white paper sheets and brown cardboard visibly soaking and fraying in swirling gray-green water. Some pieces intact, others breaking into soft wet ragged fragments. Clear tangible transition from waste paper into pulp. Visible steel tank rim and part of agitator. Realistic water, no fantasy whirlpool.",
+      "path": "/Users/ekaterinabarazduk/.codex/generated_images/01a0a55a-16f3-78e3-a8e2-cbb9a01c4867/exec-fe9791eb-943c-44a0-b759-40dff42d9ce1.png"
+    },
+    {
+      "name": "03-fibers",
+      "prompt": "Use case: photorealistic-natural. Asset: full screen landscape photograph for a premium paper recycling website. Cinematic industrial documentary photography, believable real factory textures, restrained deep green machinery, silver steel and warm ivory paper, natural side lighting, detailed but not glossy CGI. Wide landscape 16:9. No text, logos, diagram, collage, people or watermarks. Single coherent photograph. Extreme macro photographic scientific visualization of wet cellulose pulp: delicate off-white irregular fibrillated cellulose strands suspended and overlapping in clear pale green water, tiny dark detached ink specks and a few small air bubbles. Organic rough fibrous textures, translucent water, shallow depth of field, softly lit. Not noodles, not glowing strands, not plastic or CGI. Must read as real wet paper fibers under extreme magnification.",
+      "path": "/Users/ekaterinabarazduk/.codex/generated_images/01a0a55a-16f3-78e3-a8e2-cbb9a01c4867/exec-4775c7e6-94a0-4e49-b900-7e58dd0f89dc.png"
+    },
+    {
+      "name": "04-forming",
+      "prompt": "Use case: photorealistic-natural. Asset: full screen landscape photograph for a premium paper recycling website. Cinematic industrial documentary photography, believable real factory textures, restrained deep green machinery, silver steel and warm ivory paper, natural side lighting, detailed but not glossy CGI. Wide landscape 16:9. No text, logos, diagram, collage, people or watermarks. Single coherent photograph. Low close macro documentary photograph along the wet end forming wire of a real paper machine. Cream pulp spreads on a finely woven moving steel mesh and becomes a thin continuous wet paper mat. In the near foreground individually visible irregular fibers overlap and interlock, behind them a smooth cohesive wet sheet forms. Water beads drain below the wire. Clear single physical surface, believable wet paper texture.",
+      "path": "/Users/ekaterinabarazduk/.codex/generated_images/01a0a55a-16f3-78e3-a8e2-cbb9a01c4867/exec-843a407c-787e-47a4-871a-aadf71a29d7e.png"
+    },
+    {
+      "name": "05-press",
+      "prompt": "Use case: photorealistic-natural. Asset: full screen landscape photograph for a premium paper recycling website. Cinematic industrial documentary photography, believable real factory textures, restrained deep green machinery, silver steel and warm ivory paper, natural side lighting, detailed but not glossy CGI. Wide landscape 16:9. No text, logos, diagram, collage, people or watermarks. Single coherent photograph. Dramatic close documentary photograph of a continuous ivory wet paper web passing through the narrow nip between two enormous polished industrial steel press rollers supported by dark green frames. Wet felt supporting sheet, droplets draining underneath, convincing weight and precision. Clear visible unbroken paper web enters and exits roller pair. No tangled paper, no impossible roller arrangement.",
+      "path": "/Users/ekaterinabarazduk/.codex/generated_images/01a0a55a-16f3-78e3-a8e2-cbb9a01c4867/exec-73532e90-f515-4308-8c0e-10551c29bb27.png"
+    },
+    {
+      "name": "06-finished",
+      "prompt": "Use case: photorealistic-natural. Asset: full screen landscape photograph for a premium paper recycling website. Cinematic industrial documentary photography, believable real factory textures, restrained deep green machinery, silver steel and warm ivory paper, natural side lighting, detailed but not glossy CGI. Wide landscape 16:9. No text, logos, diagram, collage, people or watermarks. Single coherent photograph. Premium documentary photograph of the dry end of a real paper mill: enormous finished warm ivory recycled paper reel on a stainless steel winding machine with deep green structural supports. Continuous taut paper web feeds tangentially onto roll. Fine concentric paper layers and natural matte paper texture sharply visible on near end, industrial hall softly out of focus behind. Warm daylight, beautiful tactile finish.",
+      "path": "/Users/ekaterinabarazduk/.codex/generated_images/01a0a55a-16f3-78e3-a8e2-cbb9a01c4867/exec-73607022-e245-479c-8cfe-2728d876b978.png"
+    }
+  ]
+}

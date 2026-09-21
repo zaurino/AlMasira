@@ -1,0 +1,169 @@
+/* ==========================================================================
+   MASIRA — Quote request dialog. Shared by the home page and the inner pages,
+   so every colour here is literal rather than token-based.
+   ========================================================================== */
+
+#inquiry-dialog{
+  --d-green:#123027;
+  --d-green-lift:#1B4234;
+  --d-paper:#EFEBDD;
+  --d-mute:#B8CAB8;
+  --d-lime:#D5E59C;
+  --d-rule:rgba(213,229,156,.2);
+
+  width:min(560px,calc(100vw - 32px));
+  max-height:min(86dvh,860px);
+  margin:auto;
+  padding:clamp(26px,3.4vw,40px);
+  border:0;
+  border-radius:4px;
+  background:var(--d-green);
+  color:var(--d-paper);
+  font-family:'DM Sans',system-ui,sans-serif;
+  overflow:auto;
+  overscroll-behavior:contain;
+}
+#inquiry-dialog::backdrop{
+  background:rgba(6,18,14,.72);
+  backdrop-filter:blur(6px);
+}
+
+@media (prefers-reduced-motion:no-preference){
+  @keyframes d-in{from{opacity:0;transform:translateY(14px) scale(.985)}}
+  @keyframes d-fade{from{opacity:0}}
+  #inquiry-dialog[open]{animation:d-in .3s cubic-bezier(.2,.7,.3,1)}
+  #inquiry-dialog[open]::backdrop{animation:d-fade .3s}
+}
+
+#inquiry-dialog .close-dialog{
+  position:absolute;
+  inset-block-start:14px;
+  inset-inline-end:14px;
+  inline-size:38px;
+  block-size:38px;
+  display:grid;
+  place-items:center;
+  font-size:22px;
+  line-height:1;
+  background:none;
+  border:1px solid var(--d-rule);
+  border-radius:50%;
+  color:var(--d-mute);
+  transition:background .2s,color .2s;
+}
+#inquiry-dialog .close-dialog:hover{background:var(--d-green-lift);color:var(--d-paper)}
+
+#inquiry-dialog .eyebrow{
+  display:block;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--d-lime);
+}
+#inquiry-dialog h2{
+  margin:14px 0 0;
+  font-family:'Manrope',system-ui,sans-serif;
+  font-weight:500;
+  font-size:clamp(1.75rem,4vw,2.2rem);
+  letter-spacing:-.045em;
+  line-height:1.04;
+}
+#inquiry-dialog h2 em{font-style:italic;color:var(--d-lime)}
+#inquiry-dialog .dialog-intro{
+  margin:14px 0 0;
+  font-size:15px;
+  line-height:1.65;
+  color:var(--d-mute);
+  text-wrap:pretty;
+}
+
+#inquiry-form{
+  display:grid;
+  gap:14px;
+  margin-block-start:24px;
+}
+#inquiry-form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+#inquiry-form label{display:grid;gap:6px}
+#inquiry-form label>span{
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--d-mute);
+}
+#inquiry-form :is(input,textarea,select){
+  inline-size:100%;
+  padding:12px 14px;
+  font-size:15px;
+  color:var(--d-paper);
+  background:var(--d-green-lift);
+  border:1px solid var(--d-rule);
+  border-radius:3px;
+  transition:border-color .2s,background .2s;
+}
+#inquiry-form select{
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1.2 1.2 5.5 5.5 9.8 1.2' fill='none' stroke='%23B8CAB8' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 16px center;
+  padding-inline-end:42px;
+}
+[dir="rtl"] #inquiry-form select{background-position:left 16px center}
+#inquiry-form option{background:var(--d-green);color:var(--d-paper)}
+#inquiry-form textarea{resize:vertical;min-block-size:84px;line-height:1.6}
+#inquiry-form :is(input,textarea,select):focus-visible{
+  outline:none;
+  border-color:var(--d-lime);
+  background:#20493A;
+}
+#inquiry-form :is(input,textarea):user-invalid{border-color:#E08A66}
+
+#inquiry-form .hp{                 /* honeypot — hidden from people, not from bots */
+  position:absolute;
+  inline-size:1px;
+  block-size:1px;
+  opacity:0;
+  pointer-events:none;
+}
+
+#inquiry-form .submit-button{
+  justify-self:stretch;
+  text-align:center;
+  margin-block-start:6px;
+  padding:15px 30px;
+  border:0;
+  border-radius:999px;
+  background:var(--d-lime);
+  color:var(--d-green);
+  font-size:15px;
+  font-weight:500;
+  transition:background .22s,transform .22s,opacity .2s;
+}
+#inquiry-form .submit-button:hover:not(:disabled){background:#E4F0B6;transform:translateY(-2px)}
+#inquiry-form .submit-button:disabled{opacity:.55;cursor:progress;transform:none}
+
+#form-status{
+  margin:0;
+  min-block-size:1.2em;
+  font-size:14px;
+  line-height:1.55;
+  color:var(--d-lime);
+}
+#form-status[data-state="error"]{color:#F0A588}
+
+#inquiry-dialog :is(a,button,input,textarea,select):focus-visible{
+  outline:2px solid var(--d-lime);
+  outline-offset:2px;
+}
+
+@media (max-width:560px){
+  #inquiry-dialog{
+    width:100vw;
+    max-width:100vw;
+    max-height:100dvh;
+    block-size:100dvh;
+    border-radius:0;
+    padding:64px 22px 28px;
+  }
+  #inquiry-form .row{grid-template-columns:1fr}
+}

@@ -1,0 +1,5 @@
+{
+  "tool": "Built-in image_gen",
+  "asset": "waste-print.png",
+  "prompt": "Use case: product-mockup. Asset: a flat albedo texture for physically rendered waste newspaper in an existing 3D industrial recycling machine. Create ONE full-bleed orthographic flatbed scan of a single old off-white printed newspaper page, filling the entire rectangular image edge to edge, no perspective, no surrounding table, no shadows or lighting gradients. Fine black serif body print in narrow columns, one dark burgundy horizontal header rule in upper quarter, small monochrome halftone photographs, faded uneven ink, fine natural cellulose grain and subtle yellowed handling marks. Legible generic harmless editorial text is welcome but not important. The paper lies perfectly flat for UV mapping; wrinkles and torn edges are added by geometry so do not draw folds or torn silhouettes in this texture. Photographic surface realism, matte paper, neutral diffuse flat lighting, high detail. No logos or watermarks."
+}

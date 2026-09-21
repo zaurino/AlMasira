@@ -1,0 +1,193 @@
+/* ==========================================================================
+   MASIRA — Mobile menu. A full-screen panel shared by every page, so the
+   colours here are literal rather than theme tokens.
+   ========================================================================== */
+
+:root{--mnav-h:84px}
+@media (max-width:1000px){:root{--mnav-h:78px}}
+
+html.menu-locked,
+html.menu-locked body{overflow:hidden}
+
+/* ------------------------------------------------------------- The button */
+
+.menu-toggle{
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  gap:6px;
+  inline-size:44px;                 /* a real tap target, not a 24px sliver */
+  block-size:44px;
+  margin-inline-end:-10px;
+  padding:0;
+  background:none;
+  border:0;
+}
+.menu-toggle span{
+  display:block;
+  inline-size:24px;
+  block-size:1.5px;
+  margin-inline:auto;
+  background:currentColor;
+  border-radius:2px;
+  transition:transform .32s cubic-bezier(.2,.7,.3,1),opacity .2s;
+}
+.header.menu-open .menu-toggle span:first-child{transform:translateY(3.75px) rotate(45deg)}
+.header.menu-open .menu-toggle span:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+
+/* --------------------------------------------------------------- The panel */
+
+.mnav{
+  position:fixed;
+  inset:var(--mnav-h) 0 0;
+  z-index:25;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:32px;
+  padding:clamp(28px,7vw,48px) clamp(20px,6vw,40px) calc(28px + env(safe-area-inset-bottom));
+  background:#0B201A;
+  color:#EFEBDD;
+  font-family:'DM Sans',system-ui,sans-serif;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-10px);
+  transition:opacity .28s ease,transform .32s cubic-bezier(.2,.7,.3,1),visibility .32s;
+}
+.mnav::before{                       /* the same light source as the page heroes */
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:radial-gradient(80% 60% at 85% 0%,rgba(213,229,156,.13),transparent 62%);
+}
+.header.menu-open ~ .mnav,
+.mnav.is-open{opacity:1;visibility:visible;transform:none}
+
+/* ------------------------------------------------------------------ Links */
+
+.mnav-links{position:relative;display:flex;flex-direction:column}
+.mnav-links a{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:16px;
+  min-block-size:60px;
+  padding-block:14px;
+  border-block-end:1px solid rgba(213,229,156,.14);
+  font-family:'Manrope',system-ui,sans-serif;
+  font-weight:500;
+  font-size:clamp(1.85rem,8.5vw,2.6rem);
+  letter-spacing:-.04em;
+  line-height:1.1;
+  color:#EFEBDD;
+  text-decoration:none;
+  transition:color .2s;
+}
+.mnav-links a:first-child{border-block-start:1px solid rgba(213,229,156,.14)}
+.mnav-links a i{
+  font-style:normal;
+  font-size:11px;
+  letter-spacing:.16em;
+  color:rgba(184,202,184,.55);
+  flex:0 0 auto;
+}
+.mnav-links a[aria-current="page"]{color:#D5E59C}
+.mnav-links a[aria-current="page"] i{color:#D5E59C}
+.mnav-links a:active{color:#D5E59C}
+
+/* ------------------------------------------------------------------ Foot */
+
+.mnav-foot{position:relative;display:flex;flex-direction:column;gap:22px}
+
+.mnav-cta{
+  display:block;
+  inline-size:100%;
+  min-block-size:54px;
+  padding:16px 26px;
+  border:0;
+  border-radius:999px;
+  background:#D5E59C;
+  color:#123027;
+  font:500 16px/1 'DM Sans',system-ui,sans-serif;
+  text-align:center;
+  transition:background .22s,transform .22s;
+}
+.mnav-cta:active{background:#E4F0B6;transform:scale(.99)}
+
+.mnav-lang{display:flex;gap:8px}
+.mnav-lang button{
+  flex:1;
+  min-block-size:46px;
+  padding:12px 8px;
+  background:none;
+  border:1px solid rgba(213,229,156,.22);
+  border-radius:999px;
+  color:rgba(184,202,184,.9);
+  font:400 14px/1 'DM Sans',system-ui,sans-serif;
+  transition:background .2s,color .2s,border-color .2s;
+}
+.mnav-lang button.is-active{background:#D5E59C;border-color:#D5E59C;color:#123027;font-weight:500}
+
+.mnav-mail{
+  font-size:15px;
+  color:#D5E59C;
+  text-decoration:underline;
+  text-underline-offset:4px;
+  text-decoration-thickness:1px;
+  min-block-size:24px;
+}
+.mnav-addr{
+  margin:0;
+  font-size:13px;
+  line-height:1.7;
+  color:rgba(184,202,184,.75);
+}
+
+.mnav :is(a,button):focus-visible{outline:2px solid #D5E59C;outline-offset:3px;border-radius:3px}
+
+/* ----------------------------------------------------- Show / hide by width */
+
+/* One breakpoint for the whole site: style.css used 700px and inner.css 720px,
+   which left a band where the burger was hidden but the nav was already cramped. */
+@media (max-width:860px){
+  .header .menu-toggle,
+  body.inner-page .inner-header .menu-toggle{display:flex}
+
+  .header nav,
+  body.inner-page .inner-header nav,
+  .header.menu-open nav,
+  body.inner-page .inner-header.menu-open nav{display:none!important}
+}
+/* Below 600px the header is just the logo and the burger. */
+@media (max-width:600px){
+  .header .contact-link,
+  body.inner-page .inner-header .contact-link{display:none}
+}
+@media (min-width:861px){
+  .mnav{display:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .mnav,.menu-toggle span,.mnav-cta{transition:none}
+}
+
+/* ------------------------------------- Header while the panel is open ------
+   One dark surface from the top of the screen down, on every page. */
+@media (max-width:860px){
+  /* the panel carries the languages; inner.css needs matching specificity */
+  .header #language.lang-seg,
+  body.inner-page .inner-header #language.lang-seg{display:none}
+
+  .header.menu-open,
+  body.inner-page .header.menu-open{
+    background:#0B201A;
+    border-block-end-color:rgba(213,229,156,.14);
+    color:#EFEBDD;
+    backdrop-filter:none;
+  }
+  body.inner-page .header.menu-open .menu-toggle span{background:#EFEBDD}
+  .header.menu-open .logo img{filter:brightness(0) invert(1) opacity(.92)}
+}

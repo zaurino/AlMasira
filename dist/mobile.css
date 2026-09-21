@@ -1,0 +1,101 @@
+/* ==========================================================================
+   MASIRA — Mobile refinements, shared by every page. Loaded last.
+   Three concerns: a legibility floor, real tap targets, and removing the
+   footer blocks that repeated the same three lines four times over.
+   ========================================================================== */
+
+@media (max-width:860px){
+
+  /* ------------------------------------------------- 1. Legibility floor
+     The desktop design uses 7–9px labels. At arm's length on a phone that is
+     decoration, not text. Nothing below 11px, with the tracking eased off so
+     the shorter lines still fit. */
+  .intro-overline,
+  .brand-subtitle,
+  .intro-baseline span,
+  .intro-scroll span,
+  .film-caption span,
+  .film-counter,
+  .proof-grid span,
+  .footer-location-head span,
+  .map-label,
+  .footer-info-nav span,
+  .footer-info-contact span,
+  .footer-legal,
+  .film-section > footer span,
+  .site-footer-bottom span,
+  .footer-brand-bottom span{
+    font-size:11px;
+    letter-spacing:.1em;
+  }
+  .film-card .film-eyebrow,
+  .footer-cta .film-eyebrow,
+  .film-heading .film-eyebrow{font-size:11px;letter-spacing:.13em}
+
+  body.inner-page .inner-footer span{font-size:12px;letter-spacing:.02em}
+
+  /* --------------------------------------------------- 2. Tap targets
+     44px is the smallest reliable touch target; these were 16–26px. */
+  .logo{display:inline-flex;align-items:center;min-block-size:44px}
+
+  .intro-scroll{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    min-block-size:44px;
+    padding-block:10px;
+  }
+  .footer-action,
+  .footer-info-contact a,
+  .footer-info-nav a,
+  .site-footer-bottom button,
+  .film-section > footer button,
+  .film-section > footer .back-top,
+  .footer-legal a{
+    display:inline-flex;
+    align-items:center;
+    min-block-size:44px;
+  }
+  .location-map{min-block-size:44px}
+  body.inner-page .pg-cta address a{display:inline-flex;align-items:center;min-block-size:44px}
+
+  /* ------------------------------------ 3. The home page's four footers
+     Logo, "Paper has a future." and the copyright line appeared four times
+     in a row. One copy is enough; .site-footer-bottom is the one that keeps
+     the motion toggle beside it. */
+  .film-section > footer,
+  .footer-brand-bottom{display:none}
+
+  /* An existing rule hid this one on mobile too, which would have left the
+     page with no closing brand line at all. It is the copy we keep. */
+  footer.site-footer .site-footer-bottom{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:14px 24px;
+    padding:26px 7% calc(26px + env(safe-area-inset-bottom));
+    border-block-start:1px solid rgba(23,62,50,.12);
+  }
+  footer.site-footer .site-footer-bottom .logo img{height:22px;width:auto}
+
+  /* The remaining footer needs to carry the contact links on its own. */
+  .footer-info{padding-block-end:34px}
+  .footer-info-contact a{color:#d5e59c}
+
+  /* ---------------------------------------- 4. The circular-economy figure
+     The drawing scaled down far enough that its labels rendered at ~6px. */
+  body.inner-page .pg-cycle-art{max-inline-size:min(100%,440px)}
+  .pg-cycle-label{font-size:15px}
+  .pg-cycle-sub{font-size:12px}
+  .pg-cycle-center{font-size:17px}
+}
+
+@media (max-width:420px){
+  /* The two baseline labels were all but touching at the narrow end. */
+  .intro-baseline{flex-direction:column;align-items:flex-start;gap:7px}
+
+  /* At 360px and below the figure is the whole column, so it can breathe. */
+  .pg-cycle-label{font-size:17px}
+  .pg-cycle-sub{font-size:13px}
+  .pg-cycle-center{font-size:18px}
+}
