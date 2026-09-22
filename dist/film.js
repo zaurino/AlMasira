@@ -9,8 +9,8 @@
   const mobile = () => innerWidth <= 700;
   // Keep the source fixed for this visit, including orientation changes.
   const frameFolder = mobile() ? 'machine-mobile' : 'machine-v7';
-  const cacheLimit = mobile() ? 12 : 24;
-  const concurrent = mobile() ? 3 : 6;
+  const cacheLimit = mobile() ? 24 : 80;
+  const concurrent = mobile() ? 5 : 12;
   let target = 0, current = 0, drawn = -1, raf = 0;
   let paused = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const counter = document.querySelector('.film-counter');
@@ -74,7 +74,8 @@
     const index=Math.round(current);
     requestFrame(index);draw(index);
     const direction=target>=current?1:-1;
-    for(let i=1;i<=(paused?0:mobile()?2:5);i++)requestFrame(index+i*direction);
+    for(let i=1;i<=(paused?0:mobile()?6:20);i++)requestFrame(index+i*direction);
+    for(let i=1;i<=(paused?0:mobile()?3:8);i++)requestFrame(index-i*direction);
     track.style.transform=`scaleX(${current/(count-1)})`;
     if(!paused && Math.abs(target-current)>.15)schedule();
   }
